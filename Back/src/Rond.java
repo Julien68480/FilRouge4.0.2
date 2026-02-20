@@ -2,14 +2,10 @@ public class Rond extends Shape {
 
     int radius;
 
-    public double aireRond(int radius){
+    public Rond(int radius) {
 
         this.radius = radius;
-        double aire;
 
-        aire = Math.PI * (radius * radius);
-
-        return aire;
     }
 
 }

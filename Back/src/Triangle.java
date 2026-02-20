@@ -1,15 +1,10 @@
 public class Triangle extends Shape{
 
-    double side;
+    int side;
 
-    public double aireTriangle(double side){
+    public Triangle(int side){
 
         this.side = side;
-        double aire;
-
-        aire = (Math.sqrt(3) / 4) * (side * side);
-        return aire;
 
     }
-
 }
