@@ -4,11 +4,12 @@ import julien.filrouge.forme.Shape;
 
 public class Rectangle extends Shape {
 
-    int length;
-    int width;
+    private int length;
+    private int width;
 
-    public Rectangle(int length, int width){
+    public Rectangle(String name, String color, int length, int width){
 
+        super(name, color);
         this.length = length;
         this.width = width;
 

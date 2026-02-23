@@ -4,15 +4,16 @@ import julien.filrouge.forme.Shape;
 
 public class Rond extends Shape {
 
-    int radius;
+    private int radius;
 
-    public Rond(int radius) {
+    public Rond(String name, String color, int radius) {
 
+        super(name, color);
         this.radius = radius;
 
     }
 
-    public double aire(){
+    public double aire() {
 
         double aire;
 
@@ -21,4 +22,10 @@ public class Rond extends Shape {
         return aire;
 
     }
+
+
 }
+
+
+
+

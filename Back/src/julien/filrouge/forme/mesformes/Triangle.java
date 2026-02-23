@@ -4,10 +4,11 @@ import julien.filrouge.forme.Shape;
 
 public class Triangle extends Shape {
 
-    int side;
+    private int side;
 
-    public Triangle(int side){
+    public Triangle(String name, String color, int side){
 
+        super(name, color);
         this.side = side;
 
     }

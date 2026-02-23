@@ -1,9 +1,9 @@
 package julien.filrouge.forme;
 
-public class Shape {
+public abstract class Shape {
 
-    String name;
-    String color;
+    private String name;
+    private String color;
 
 
     public Shape(String name, String color) {
@@ -13,5 +13,20 @@ public class Shape {
 
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getColor() {
+        return color;
+    }
+
+    public abstract double aire();
+
+    public void afficher() {
+        System.out.println("Forme : " + getName());
+        System.out.println("Couleur : " + getColor());
+        System.out.println("Aire : " + aire()); // ← appelle le bon calcul
+
+    }
 }
