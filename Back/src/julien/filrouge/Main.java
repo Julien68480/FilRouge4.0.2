@@ -10,16 +10,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Rond rond1 = new Rond("rond", "rouge", 20);
-        Carre carre1 = new Carre("carre", "vert", 20);
-        Triangle triangle1 = new Triangle("triangle", "bleu", 20);
-        Rectangle rectangle1 = new Rectangle("rectangle", "jaune", 20, 30);
+        Rectangle rectangle1 = new Rectangle(1L,"rectangle", "rouge", 1, 3, 0, 10, 20);
 
-        rond1.afficher();
-        carre1.afficher();
-        triangle1.afficher();
         rectangle1.afficher();
-    }
 
+    }
 
 }

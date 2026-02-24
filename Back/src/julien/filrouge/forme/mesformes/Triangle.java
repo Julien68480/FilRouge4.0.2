@@ -1,25 +1,25 @@
 package julien.filrouge.forme.mesformes;
 
-import julien.filrouge.forme.Shape;
-
 public class Triangle extends Shape {
 
     private int side;
 
-    public Triangle(String name, String color, int side){
-
-        super(name, color);
+    public Triangle(Long id, String name, String color, double x, double y, double rotation, int side) {
+        super(id, name, color, x, y, rotation);
         this.side = side;
+    }
+
+    @Override
+    public double calculAire(){
+
+        return (Math.sqrt(3) * (side * side)) / 4;
 
     }
 
-    public double aire(){
+    @Override
+    public double calculPerimetre() {
 
-        double aire;
-
-        aire = (Math.sqrt(3) * (side * side)) / 4;
-
-        return aire;
+        return side * 3;
 
     }
 }

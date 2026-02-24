@@ -1,27 +1,27 @@
 package julien.filrouge.forme.mesformes;
 
-import julien.filrouge.forme.Shape;
-
 public class Rectangle extends Shape {
 
     private int length;
     private int width;
 
-    public Rectangle(String name, String color, int length, int width){
-
-        super(name, color);
+    public Rectangle(Long id, String name, String color, double x, double y, double rotation, int length, int width) {
+        super(id, name, color, x, y, rotation);
         this.length = length;
         this.width = width;
+    }
+
+    @Override
+    public double calculAire(){
+
+        return length * width;
 
     }
 
-    public double aire(){
+    @Override
+    public double calculPerimetre() {
 
-        double aire;
-
-        aire = length * width;
-
-        return aire;
+        return 2 * ( length + width );
 
     }
 }

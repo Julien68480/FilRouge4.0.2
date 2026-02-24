@@ -1,25 +1,24 @@
 package julien.filrouge.forme.mesformes;
 
-import julien.filrouge.forme.Shape;
-
 public class Carre extends Shape {
 
     private int side;
 
-    public Carre(String name, String color, int side){
-
-        super(name, color);
+    public Carre(Long id, String name, String color, double x, double y, double rotation, int side) {
+        super(id, name, color, x, y, rotation);
         this.side = side;
+    }
+
+    @Override
+    public double calculAire(){
+
+        return side * side;
 
     }
 
-    public double aire(){
-
-        double aire;
-
-        aire = side * side;
-
-        return aire;
-
+    @Override
+    public double calculPerimetre() {
+        return 2 * side * 2;
     }
 }
+

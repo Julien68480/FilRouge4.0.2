@@ -1,25 +1,25 @@
 package julien.filrouge.forme.mesformes;
 
-import julien.filrouge.forme.Shape;
-
 public class Rond extends Shape {
 
     private int radius;
 
-    public Rond(String name, String color, int radius) {
-
-        super(name, color);
+    public Rond(Long id, String name, String color, double x, double y, double rotation, int radius) {
+        super(id, name, color, x, y, rotation);
         this.radius = radius;
+    }
+
+    @Override
+    public double calculAire() {
+
+        return Math.PI * Math.pow(radius, 2);
 
     }
 
-    public double aire() {
+    public double calculPerimetre()
+    {
 
-        double aire;
-
-        aire = Math.PI * Math.pow(radius, 2);
-
-        return aire;
+        return 2 * Math.PI * radius;
 
     }
 
