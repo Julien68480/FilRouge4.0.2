@@ -2,11 +2,21 @@ package julien.filrouge.forme.mesformes;
 
 public class Rond extends Shape {
 
-    private int radius;
+    private double radius;
 
     public Rond(Long id, String name, String color, double x, double y, double rotation, int radius) {
-        super(id, name, color, x, y, rotation);
+
+        super(id, name, color, x, y);
         this.radius = radius;
+
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
     }
 
     @Override

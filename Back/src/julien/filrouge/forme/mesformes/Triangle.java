@@ -2,11 +2,21 @@ package julien.filrouge.forme.mesformes;
 
 public class Triangle extends Shape {
 
-    private int side;
+    private double side;
 
     public Triangle(Long id, String name, String color, double x, double y, double rotation, int side) {
-        super(id, name, color, x, y, rotation);
+
+        super(id, name, color, x, y);
         this.side = side;
+
+    }
+
+    public void setSide(double side) {
+        this.side = side;
+    }
+
+    public double getSide() {
+        return side;
     }
 
     @Override
