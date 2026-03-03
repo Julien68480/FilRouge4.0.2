@@ -22,25 +22,37 @@ public class Puzzle {
         this.imageModele = imageModele;
         this.chapter = chapter;
 
-        shapes.add(new Rectangle(1L, "rectangle","Red", 10, 20, 30, 20));
-        shapes.add(new Rond(2L, "rond","Blue", 10, 20, 30));
-        shapes.add(new Triangle(3L, "triangle","Green", 10, 20, 30));
-        shapes.add(new Carre(4L, "carre","Yellow", 10, 20, 30));
+        shapes.add(new Rectangle(1L,"Red", 10, 20, 30, 20));
+        shapes.add(new Rond(2L, "Blue", 10, 20, 30));
+        shapes.add(new Triangle(3L,"Green", 10, 20, 30));
+        shapes.add(new Carre(4L,"Yellow", 10, 20, 30));
 
     }
 
-    public void calculateTotals() {
-        double totalAire = 0;
+    public void afficherPerimetreTotal() {
         double totalPerimetre = 0;
 
         for (Shape shape : shapes){
-            totalAire += shape.calculAire();
+
             totalPerimetre += shape.calculPerimetre();
         }
 
+        System.out.println("Périmètre total : " + totalPerimetre);
+
+    }
+
+    public void afficherAireTotal() {
+
+        double totalAire = 0;
+
+        for (Shape shape : shapes){
+
+            totalAire += shape.calculAire();
+
+        }
 
         System.out.println("Aire totale : " + totalAire);
-        System.out.println("Périmètre total : " + totalPerimetre);
+
     }
 
 

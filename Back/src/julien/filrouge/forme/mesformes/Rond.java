@@ -4,9 +4,9 @@ public class Rond extends Shape {
 
     private double radius;
 
-    public Rond(Long id, String name, String color, double x, double y, int radius) {
+    public Rond(Long id, String color, double x, double y, int radius) {
 
-        super(id, name, color, x, y);
+        super(id, color, x, y);
         this.radius = radius;
 
     }

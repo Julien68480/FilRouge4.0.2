@@ -21,6 +21,15 @@ public class Story {
 
     }
 
+    public void addChapter(Chapter chapter) {
+
+        if (!this.chapters.contains(chapter)) {
+
+            this.chapters.add(chapter);
+
+        }
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

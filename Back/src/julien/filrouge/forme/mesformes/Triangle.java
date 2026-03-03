@@ -4,11 +4,15 @@ public class Triangle extends Shape {
 
     private double side;
 
-    public Triangle(Long id, String name, String color, double x, double y, int side) {
+    public Triangle(Long id, String color, double x, double y, int side) {
 
-        super(id, name, color, x, y);
+        super(id, color);
         this.side = side;
 
+    }
+
+    public void getColor(String color) {
+        this.color = color;
     }
 
     public void setSide(double side) {
@@ -20,9 +24,9 @@ public class Triangle extends Shape {
     }
 
     @Override
-    public double calculAire(){
+    public double calculAire() {
 
-        return (Math.sqrt(3) * (side * side)) / 4;
+        return (Math.sqrt(3) * (side * side)) / 4; // Math.sqrt(3) c'est racine carré de 3
 
     }
 
@@ -32,4 +36,5 @@ public class Triangle extends Shape {
         return side * 3;
 
     }
+
 }

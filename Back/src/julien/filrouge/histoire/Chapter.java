@@ -1,5 +1,10 @@
 package julien.filrouge.histoire;
 
+import julien.filrouge.forme.mesformes.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Une story est <b>composé</b> de chapitre
  */
@@ -11,12 +16,76 @@ public class  Chapter {
     private String texteNarratif;
     private int ordre;
     private Story story;
+    private String instruction;
+    private String imageModele;
+    private List<Shape> shapes = new ArrayList<>();
 
-    public Chapter(String titre, String texteNarratif, int ordre, Story story) {
+    public Chapter(String titre, String texteNarratif, int ordre, Story story, String instruction, String imageModele) {
+
         this.titre = titre;
         this.texteNarratif = texteNarratif;
         this.ordre = ordre;
         this.story = story;
+        this.instruction = instruction;
+        this.imageModele = imageModele;
+
+        story.addChapter(this);
+
+
+        shapes.add(new Rectangle(1L,"Red", 10, 20, 30, 20));
+        shapes.add(new Rond(2L, "Blue", 10, 20, 30));
+        shapes.add(new Triangle(3L,"Green", 10, 20, 30));
+        shapes.add(new Carre(4L,"Yellow", 10, 20, 30));
+    }
+
+    public void afficherPerimetreTotal() {
+        double totalPerimetre = 0;
+
+        for (Shape shape : shapes){
+
+            totalPerimetre += shape.calculPerimetre();
+        }
+
+        System.out.println("Périmètre total : " + totalPerimetre);
+
+    }
+
+    public void afficherAireTotal() {
+
+        double totalAire = 0;
+
+        for (Shape shape : shapes){
+
+            totalAire += shape.calculAire();
+
+        }
+
+        System.out.println("Aire totale : " + totalAire);
+
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public String getImageModele() {
+        return imageModele;
+    }
+
+    public List<Shape> getShapes() {
+        return shapes;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+
+    public void setImageModele(String imageModele) {
+        this.imageModele = imageModele;
+    }
+
+    public void setShapes(List<Shape> shapes) {
+        this.shapes = shapes;
     }
 
     public void setId(Long id) {
