@@ -11,9 +11,6 @@ public class Triangle extends Shape {
 
     }
 
-    public void getColor(String color) {
-        this.color = color;
-    }
 
     public void setSide(double side) {
         this.side = side;

@@ -38,19 +38,20 @@ public class  Chapter {
         shapes.add(new Carre(4L,"Yellow", 10, 20, 30));
     }
 
-    public void afficherPerimetreTotal() {
+    public String afficherPerimetreTotal() {
+
         double totalPerimetre = 0;
 
-        for (Shape shape : shapes){
+        for (Shape shape : shapes) {
 
             totalPerimetre += shape.calculPerimetre();
-        }
 
-        System.out.println("Périmètre total : " + totalPerimetre);
+        }
+        return "Périmètre total : " + totalPerimetre;
 
     }
 
-    public void afficherAireTotal() {
+    public String afficherAireTotal() {
 
         double totalAire = 0;
 
@@ -59,8 +60,7 @@ public class  Chapter {
             totalAire += shape.calculAire();
 
         }
-
-        System.out.println("Aire totale : " + totalAire);
+        return "Aire totale : " + totalAire;
 
     }
 

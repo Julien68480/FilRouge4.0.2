@@ -3,7 +3,7 @@ package julien.filrouge.forme.mesformes;
 public abstract class Shape {
 
     private Long id;
-    protected String color;
+    private String color;
     private double x;
     private double y;
 

@@ -25,8 +25,8 @@ public class Main {
             shape.afficher();
         }
 
-        chapter1.afficherAireTotal();
-        chapter1.afficherPerimetreTotal();
+        System.out.println(chapter1.afficherAireTotal());
+        System.out.println(chapter1.afficherPerimetreTotal());
 
     }
 
