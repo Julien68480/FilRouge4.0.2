@@ -1,7 +1,9 @@
 package julien.filrouge.histoire;
 
 import julien.filrouge.forme.mesformes.*;
+import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
