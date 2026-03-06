@@ -4,7 +4,7 @@ public class Triangle extends Shape {
 
     private double side;
 
-    public Triangle(Long id, String color, double x, double y, int side) {
+    public Triangle(Long id, String color, double x, double y, double side) {
 
         super(id, color, x, y);
         this.side = side;

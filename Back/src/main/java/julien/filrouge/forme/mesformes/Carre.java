@@ -4,7 +4,7 @@ public class Carre extends Shape {
 
     private double side;
 
-    public Carre(Long id, String color, double x, double y, int side) {
+    public Carre(Long id, String color, double x, double y, double side) {
 
         super(id, color, x, y);
         this.side = side;

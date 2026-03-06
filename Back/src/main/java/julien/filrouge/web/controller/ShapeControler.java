@@ -1,32 +1,54 @@
 package julien.filrouge.web.controller;
 
+import julien.filrouge.dto.ShapeDto;
 import julien.filrouge.forme.mesformes.*;
 import julien.filrouge.web.dao.ShapeDao;
+import julien.filrouge.web.ShapeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*; //permet d'importer toute les annotation Controller et mapping
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.ArrayList;
+
+import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class ShapeControler {
 
-    private final ShapeDao shapeDao;
+    private final ShapeService shapeService;
 
-    public ShapeControler(ShapeDao shapeDao) {
-        this.shapeDao = shapeDao;
+    public ShapeControler(ShapeService shapeService) { // ✅ plus de ShapeDao
+        this.shapeService = shapeService;
     }
 
     @GetMapping("/shapes")
     public List<Shape> listeShapes(){
-        return shapeDao.findAll();
+        return shapeService.findAll();
     }
 
     @GetMapping("/shapes/{id}")
     public Shape afficherShape(@PathVariable Long id){
-        return shapeDao.findById(id);
+        return shapeService.findById(id);
     }
 
+    @PostMapping("/shapes")
+    public ResponseEntity<Void> ajouterShape(@RequestBody ShapeDto dto) {
+
+        Shape saved = shapeService.save(dto);
+
+        if (Objects.isNull(saved)) {
+            return ResponseEntity.noContent().build(); // 204 si échec
+        }
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()       // part de la requete actuelle
+                .path("/{id}")              // dit que ce sera sous /id qu'il sera créer
+                .buildAndExpand(saved.getId()) // récupére l'ID du POST
+                .toUri();
+
+        return ResponseEntity.created(uri).build(); // on retourne la réponse dans le cas de la création d'un objet 201
+    }
 
 }
 

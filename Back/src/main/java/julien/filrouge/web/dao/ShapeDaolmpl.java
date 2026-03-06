@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+// c'est ici que l'on communiquera avec la BDD
+
 @Repository
 public class ShapeDaolmpl implements ShapeDao {
 
@@ -19,24 +21,18 @@ public class ShapeDaolmpl implements ShapeDao {
     }
 
     @Override
-
     public List<Shape> findAll() {
 
         return shapes;
-
     }
 
-
     @Override
-
     public Shape findById(Long id) {
 
         for (Shape shape : shapes) {
-
             if (shape.getId().equals(id)) {
 
                 return shape;
-
             }
         }
             return null;
