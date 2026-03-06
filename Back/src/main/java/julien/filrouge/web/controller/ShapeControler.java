@@ -50,6 +50,27 @@ public class ShapeControler {
         return ResponseEntity.created(uri).build(); // on retourne la réponse dans le cas de la création d'un objet 201
     }
 
+    @PutMapping
+    public ResponseEntity<Void> modifierShape(@RequestBody ShapeDto dto) {
+        Shape saved = shapeService.save(dto);
+        if (Objects.isNull(saved)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/shapes/{id}")
+    public ResponseEntity<Void> supprimerShape(@PathVariable Long id) {
+        Shape existing = shapeService.findById(id);
+
+        if (Objects.isNull(existing)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        shapeService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 
 

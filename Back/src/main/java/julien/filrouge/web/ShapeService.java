@@ -17,11 +17,9 @@ public class ShapeService {
         this.shapeDao = shapeDao;
     }
 
-    public Shape save(ShapeDto dto) {
-        //retourne un objet de type Shape on utilise la méthode
-        // save pour l'enregistrerc et elle reçoit ShapeDto
-
-        Shape shape = switch (dto.getType()) { //selon le type renvoyé on crée l'objet du bon type
+    private Shape construireShape(ShapeDto dto) {
+        return switch (dto.getType()){
+         //selon le type renvoyé on crée l'objet du bon type
 
             case "rectangle" -> new Rectangle(dto.getId(), dto.getColor(), dto.getX(), dto.getY(), dto.getLength(), dto.getWidth());
 
@@ -34,8 +32,23 @@ public class ShapeService {
             default -> throw new IllegalArgumentException("Type inconnu !");
         };
 
-        return shapeDao.save(shape); //on retour l'objet et on le save
+    }
 
+    public Shape save(ShapeDto dto) {
+        //retourne un objet de type Shape on utilise la méthode
+        // save pour l'enregistrerc et elle reçoit ShapeDto
+
+        return shapeDao.save(construireShape(dto));
+    }
+
+    public Shape update(ShapeDto dto) {
+
+        return shapeDao.save(construireShape(dto));
+
+    }
+
+    public void delete(Long id) {
+        shapeDao.delete(id);
     }
 
     public List<Shape> findAll() {

@@ -44,4 +44,9 @@ public class ShapeDaolmpl implements ShapeDao {
 
         return shape;
     }
+
+    @Override
+    public void delete(Long id) {
+        shapes.removeIf(shape -> shape.getId().equals(id));
+    }
 }

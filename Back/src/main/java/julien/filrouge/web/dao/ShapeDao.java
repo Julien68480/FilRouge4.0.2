@@ -15,4 +15,6 @@ public interface ShapeDao {
 
     Shape save(Shape shape);
 
+        void delete(Long id);
+
 }
