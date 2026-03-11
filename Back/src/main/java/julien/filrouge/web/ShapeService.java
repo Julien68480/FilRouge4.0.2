@@ -43,7 +43,7 @@ public class ShapeService {
 
     public Shape update(ShapeDto dto) {
 
-        return shapeDao.save(construireShape(dto));
+        return shapeDao.update(construireShape(dto));
 
     }
 

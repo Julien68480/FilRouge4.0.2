@@ -46,6 +46,19 @@ public class ShapeDaolmpl implements ShapeDao {
     }
 
     @Override
+    public Shape update(Shape shape) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shapes.get(i).getId().equals(shape.getId())) {
+
+                shapes.set(i, shape);
+
+                return shape;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         shapes.removeIf(shape -> shape.getId().equals(id));
     }
