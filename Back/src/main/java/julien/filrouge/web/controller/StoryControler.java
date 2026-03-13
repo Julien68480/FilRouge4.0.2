@@ -20,6 +20,8 @@ public class StoryControler {
     public List<Story> listeStory(){ return storyService.findAll();}
 
     @GetMapping("/storys/{id}")
-    public ResponseEntity<Void> ajouterStory(@RequestBody StoryDto dto){}
+    public Story afficherStory(@PathVariable Long id){
+        return storyService.findById(id);
+    }
 
 }
