@@ -2,8 +2,8 @@ package julien.filrouge.web.controller;
 
 import julien.filrouge.histoire.Story;
 import julien.filrouge.web.StoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,5 +18,8 @@ public class StoryControler {
 
     @GetMapping("/storys")
     public List<Story> listeStory(){ return storyService.findAll();}
+
+    @GetMapping("/storys/{id}")
+    public ResponseEntity<Void> ajouterStory(@RequestBody StoryDto dto){}
 
 }

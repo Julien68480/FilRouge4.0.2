@@ -15,4 +15,8 @@ public class StoryService {
 
 
     public List<Story> findAll() { return storyDao.findAll();}
+
+    public Story findById(Long id){
+        return storyDao.findById(id);
+    }
 }
