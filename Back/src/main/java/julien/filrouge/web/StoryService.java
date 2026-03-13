@@ -33,6 +33,6 @@ public class StoryService {
     }
 
     public Story update(StoryDto dto) {
-        return storyDao.save(construireStory(dto));
+        return storyDao.update(construireStory(dto));
     }
 }

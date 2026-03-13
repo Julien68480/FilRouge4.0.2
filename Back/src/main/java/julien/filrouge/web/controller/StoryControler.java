@@ -48,7 +48,7 @@ public class StoryControler {
         return ResponseEntity.created(uri).build(); // on retourne la réponse (le lien de l'objet) dans le cas de la création d'un objet 201
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("storys/{id}")
     public ResponseEntity<Void> modifierStory(@PathVariable Long id, @RequestBody StoryDto dto) {
         Story existing = storyService.findById(id);
 
