@@ -35,4 +35,6 @@ public class StoryService {
     public Story update(StoryDto dto) {
         return storyDao.update(construireStory(dto));
     }
+
+    public void delete(Long id){ storyDao.delete(id);}
 }

@@ -65,4 +65,16 @@ public class StoryControler {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/storys/{id}")
+    public ResponseEntity<Void> supprimerStory(@PathVariable Long id) {
+        Story existing = storyService.findById(id);
+
+        if (Objects.isNull(existing)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        storyService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
