@@ -1,5 +1,6 @@
 package julien.filrouge.histoire;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import julien.filrouge.forme.mesformes.*;
 import org.springframework.stereotype.Repository;
 
@@ -17,13 +18,17 @@ public class  Chapter {
     private String titre;
     private String texteNarratif;
     private int ordre;
+    @JsonBackReference
     private Story story;
     private String instruction;
     private String imageModele;
     private List<Shape> shapes = new ArrayList<>();
 
+    private static Long compteur = 1L;
+
     public Chapter(String titre, String texteNarratif, int ordre, Story story, String instruction, String imageModele) {
 
+        this.id = compteur++; //permet de ne pas gérer l'ID
         this.titre = titre;
         this.texteNarratif = texteNarratif;
         this.ordre = ordre;

@@ -40,7 +40,7 @@ public class ShapeDaolmpl implements ShapeDao {
 
     @Override
     public Shape save(Shape shape) {
-            shapes.add(shape);
+        shapes.add(shape);
 
         return shape;
     }
@@ -60,6 +60,7 @@ public class ShapeDaolmpl implements ShapeDao {
 
     @Override
     public void delete(Long id) {
+
         shapes.removeIf(shape -> shape.getId().equals(id));
     }
 }

@@ -47,7 +47,7 @@ public class ShapeControler {
                 .buildAndExpand(saved.getId()) // récupére l'ID du POST
                 .toUri();
 
-        return ResponseEntity.created(uri).build(); // on retourne la réponse dans le cas de la création d'un objet 201
+        return ResponseEntity.created(uri).build(); // on retourne la réponse (le lien de l'objet) dans le cas de la création d'un objet 201
     }
 
     @PutMapping("/shapes/{id}")

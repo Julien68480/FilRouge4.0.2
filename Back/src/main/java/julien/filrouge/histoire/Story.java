@@ -1,5 +1,7 @@
 package julien.filrouge.histoire;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,12 @@ public class Story {
     private String description;
     private DifficultyLevel difficultyLevel;
     private String coverImage;
+    @JsonManagedReference
     private List<Chapter> chapters = new ArrayList<>();
 
-    public Story(String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
+    public Story(Long id, String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
 
+        this.id = id;
         this.titre = titre;
         this.description = description;
         this.difficultyLevel = difficultyLevel;
