@@ -1,4 +1,7 @@
-/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/Main.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/Application.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/dto/ChapterDto.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/dto/ShapeDto.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/dto/StoryDto.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/forme/mesformes/Carre.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/forme/mesformes/Rectangle.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/forme/mesformes/Rond.java
@@ -8,3 +11,13 @@
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/DifficultyLevel.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/Story.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/puzzle/Puzzle.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/ShapeService.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/StoryService.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/controller/ShapeControler.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/controller/StoryControler.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/ChapterDao.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/ChapterDaoImpl.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/ShapeDao.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/ShapeDaolmpl.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/StoryDao.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/StoryDaolmpl.java

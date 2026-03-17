@@ -15,7 +15,7 @@ class ChapterTest {
     @DisplayName("Test création d'un titre")
     @Test
     void constructeurInitialiseLeTitre() {
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
         assertEquals("Mon Titre", chapter.getTitre());
     }
@@ -23,10 +23,10 @@ class ChapterTest {
     @DisplayName("Test création chapitre")
     @Test
     void constructeurInitialiseTousLesChamps() {
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
         assertEquals("Texte narratif", chapter.getTexteNarratif());
-        assertEquals(1, chapter.getOrdre());
+        assertEquals(1, chapter.getOrder());
         assertEquals(story, chapter.getStory());
         assertEquals("Instruction", chapter.getInstruction());
         assertEquals("image.jpg", chapter.getImageModele());
@@ -37,7 +37,7 @@ class ChapterTest {
     void constructeurAjouteChapterALaStory() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
 
         // ACT
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
@@ -52,7 +52,7 @@ class ChapterTest {
     void constructeurInitialise4Shapes() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
 
         // ACT
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
@@ -66,7 +66,7 @@ class ChapterTest {
     void constructeurInitialiseLesBonnesShapes() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
 
         // ACT
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
@@ -83,20 +83,20 @@ class ChapterTest {
     void setterModifientLesChamps() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
 
         // ACT
         chapter.setTitre("Nouveau Titre");
         chapter.setTexteNarratif("Nouveau texte");
-        chapter.setOrdre(5);
+        chapter.setOrder(5);
         chapter.setInstruction("Nouvelle instruction");
         chapter.setImageModele("nouvelle_image.jpg");
 
         // ASSERT
         assertEquals("Nouveau Titre", chapter.getTitre());
         assertEquals("Nouveau texte", chapter.getTexteNarratif());
-        assertEquals(5, chapter.getOrdre());
+        assertEquals(5, chapter.getOrder());
         assertEquals("Nouvelle instruction", chapter.getInstruction());
         assertEquals("nouvelle_image.jpg", chapter.getImageModele());
     }
@@ -106,11 +106,11 @@ class ChapterTest {
     void setShapesRemplaceLaListe() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
 
         List<Shape> nouvellesShapes = new ArrayList<>();
-        nouvellesShapes.add(new Rectangle(10L, "Black", 5, 5, 10, 20));
+        nouvellesShapes.add(new Rectangle( "Black", 5, 5, 10, 20));
 
         // ACT
         chapter.setShapes(nouvellesShapes); //remplacement de la liste de forme
@@ -125,7 +125,7 @@ class ChapterTest {
     void afficherPerimetreTotalRetourneLeBonResultat() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
 
         // ACT
@@ -140,7 +140,7 @@ class ChapterTest {
     void afficherAireTotalRetourneLaBonneAire() {
 
         // ARRANGE
-        Story story = new Story(1L,"Titre", "description", EASY, "image");
+        Story story = new Story("Titre", "description", EASY, "image");
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction", "image.jpg");
 
         // ACT

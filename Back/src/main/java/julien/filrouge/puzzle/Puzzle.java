@@ -22,10 +22,10 @@ public class Puzzle {
         this.imageModele = imageModele;
         this.chapter = chapter;
 
-        shapes.add(new Rectangle(1L,"Red", 10, 20, 30, 20));
-        shapes.add(new Rond(2L, "Blue", 10, 20, 30));
-        shapes.add(new Triangle(3L,"Green", 10, 20, 30));
-        shapes.add(new Carre(4L,"Yellow", 10, 20, 30));
+        shapes.add(new Rectangle("Red", 10, 20, 30, 20));
+        shapes.add(new Rond("Blue", 10, 20, 30));
+        shapes.add(new Triangle("Green", 10, 20, 30));
+        shapes.add(new Carre("Yellow", 10, 20, 30));
 
     }
 

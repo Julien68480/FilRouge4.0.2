@@ -1,5 +1,7 @@
 package julien.filrouge.dto;
 
+import julien.filrouge.forme.mesformes.Shape;
+
 import java.util.List;
 
 public class ChapterDto {
@@ -11,6 +13,33 @@ public class ChapterDto {
     private String instructions;
     private String imageModele;
     private List<ShapeDto> shapes;
+    private Long storyID;
+
+    public ChapterDto(Long id, String titre, String textNarratif, int order, String instructions, String imageModele, List<Shape> shapes, Long storyID) {
+        this.id = id;
+        this.titre = titre;
+        this.textNarratif = textNarratif;
+        this.order = order;
+        this.instructions = instructions;
+        this.imageModele = imageModele;
+        this.shapes = shapes.stream()
+                .map(s -> {
+                    ShapeDto dto = new ShapeDto();
+                    dto.setId(s.getId());
+                    dto.setColor(s.getColor());
+                    dto.setX(s.getX());
+                    dto.setY(s.getY());
+                    return dto;
+                })
+                .toList();
+        this.storyID = storyID;
+    }
+
+    public ChapterDto() {}
+
+    public Long getStoryID() {
+        return storyID;
+    }
 
     public Long getId() {
         return id;
@@ -38,6 +67,10 @@ public class ChapterDto {
 
     public List<ShapeDto> getShapes() {
         return shapes;
+    }
+
+    public void setStoryID(Long storyID) {
+        this.storyID = storyID;
     }
 
     public void setId(Long id) {

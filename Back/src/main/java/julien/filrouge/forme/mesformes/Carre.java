@@ -1,12 +1,17 @@
 package julien.filrouge.forme.mesformes;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Carre extends Shape {
 
     private double side;
 
-    public Carre(Long id, String color, double x, double y, double side) {
+    public Carre() {}
 
-        super(id, color, x, y);
+    public Carre(String color, double x, double y, double side) {
+
+        super(color, x, y);
         this.side = side;
 
     }

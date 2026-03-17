@@ -1,22 +1,30 @@
 package julien.filrouge.forme.mesformes;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Shape {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String color;
     private double x;
     private double y;
 
 
-    protected Shape(Long id, String color, double x, double y) {
+    protected Shape(String color, double x, double y) {
 
-        this.id = id;
+
         this.color = color;
         this.x = x;
         this.y = y;
     }
+
+    public Shape() {}
 
     public Long getId() {
         return id;

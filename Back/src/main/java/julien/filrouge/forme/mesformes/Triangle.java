@@ -1,12 +1,17 @@
 package julien.filrouge.forme.mesformes;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Triangle extends Shape {
 
     private double side;
 
-    public Triangle(Long id, String color, double x, double y, double side) {
+    public Triangle() {}
 
-        super(id, color, x, y);
+    public Triangle(String color, double x, double y, double side) {
+
+        super(color, x, y);
         this.side = side;
 
     }

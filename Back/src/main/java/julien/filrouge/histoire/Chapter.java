@@ -1,37 +1,40 @@
 package julien.filrouge.histoire;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import julien.filrouge.forme.mesformes.*;
-import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Une story est <b>composé</b> de chapitre
  */
-
+@Entity
 public class  Chapter {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titre;
     private String texteNarratif;
-    private int ordre;
-    @JsonBackReference
+    @Column(name = "chapter_order")
+    private int order;
+    @ManyToOne
+    @JoinColumn(name = "story_id")
     private Story story;
     private String instruction;
     private String imageModele;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "chapter_id")
     private List<Shape> shapes = new ArrayList<>();
 
-    private static Long compteur = 1L;
+    public Chapter() {}
 
-    public Chapter(String titre, String texteNarratif, int ordre, Story story, String instruction, String imageModele) {
+    public Chapter(String titre, String texteNarratif, int order, Story story, String instruction, String imageModele) {
 
-        this.id = compteur++; //permet de ne pas gérer l'ID
         this.titre = titre;
         this.texteNarratif = texteNarratif;
-        this.ordre = ordre;
+        this.order = order;
         this.story = story;
         this.instruction = instruction;
         this.imageModele = imageModele;
@@ -39,10 +42,10 @@ public class  Chapter {
         story.addChapter(this);
 
 
-        shapes.add(new Rectangle(1L,"Red", 10, 20, 30, 20));
-        shapes.add(new Rond(2L, "Blue", 10, 20, 30));
-        shapes.add(new Triangle(3L,"Green", 10, 20, 30));
-        shapes.add(new Carre(4L,"Yellow", 10, 20, 30));
+        shapes.add(new Rectangle("Red", 10, 20, 30, 20));
+        shapes.add(new Rond("Blue", 10, 20, 30));
+        shapes.add(new Triangle("Green", 10, 20, 30));
+        shapes.add(new Carre("Yellow", 10, 20, 30));
     }
 
     public String afficherPerimetreTotal() {
@@ -107,8 +110,8 @@ public class  Chapter {
         this.texteNarratif = texteNarratif;
     }
 
-    public void setOrdre(int ordre) {
-        this.ordre = ordre;
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public void setStory(Story story) {
@@ -127,11 +130,12 @@ public class  Chapter {
         return texteNarratif;
     }
 
-    public int getOrdre() {
-        return ordre;
+    public int getOrder() {
+        return order;
     }
 
     public Story getStory() {
         return story;
     }
+
 }

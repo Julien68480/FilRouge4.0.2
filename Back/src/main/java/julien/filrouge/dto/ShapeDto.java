@@ -1,5 +1,7 @@
 package julien.filrouge.dto;
 
+import jakarta.persistence.Entity;
+
 public class ShapeDto {
 
     private String type;
@@ -11,6 +13,21 @@ public class ShapeDto {
     private double length;
     private double radius;
     private double side;
+
+    public ShapeDto(String type, Long id, String color, double x, double y, double width, double length, double radius, double side) {
+        this.type = type;
+        this.id = id;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.length = length;
+        this.radius = radius;
+        this.side = side;
+    }
+
+    public ShapeDto() {}
+
 
     public String getType() {
         return type;

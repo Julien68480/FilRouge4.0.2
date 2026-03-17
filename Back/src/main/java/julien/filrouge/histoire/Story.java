@@ -1,23 +1,28 @@
 package julien.filrouge.histoire;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Story {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titre;
     private String description;
     private DifficultyLevel difficultyLevel;
     private String coverImage;
-    @JsonManagedReference
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters = new ArrayList<>();
 
-    public Story(Long id, String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
+    public Story() {}
 
-        this.id = id;
+    public Story(String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
+
         this.titre = titre;
         this.description = description;
         this.difficultyLevel = difficultyLevel;

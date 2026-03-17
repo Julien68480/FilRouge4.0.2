@@ -1,13 +1,18 @@
 package julien.filrouge.forme.mesformes;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Rectangle extends Shape {
 
     private double length;
     private double width;
 
-    public Rectangle(Long id, String color, double x, double y, double length, double width) {
+    public Rectangle() {}
 
-        super(id, color, x, y);
+    public Rectangle(String color, double x, double y, double length, double width) {
+
+        super(color, x, y);
         this.length = length;
         this.width = width;
 

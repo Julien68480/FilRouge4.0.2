@@ -21,13 +21,13 @@ public class ShapeService {
         return switch (dto.getType()){
          //selon le type renvoyé on crée l'objet du bon type
 
-            case "rectangle" -> new Rectangle(dto.getId(), dto.getColor(), dto.getX(), dto.getY(), dto.getLength(), dto.getWidth());
+            case "rectangle" -> new Rectangle(dto.getColor(), dto.getX(), dto.getY(), dto.getLength(), dto.getWidth());
 
-            case "rond" -> new Rond(dto.getId(), dto.getColor(), dto.getX(), dto.getY(), dto.getRadius());
+            case "rond" -> new Rond(dto.getColor(), dto.getX(), dto.getY(), dto.getRadius());
 
-            case "triangle" -> new Triangle(dto.getId(), dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
+            case "triangle" -> new Triangle(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
 
-            case "carre" -> new Carre(dto.getId(), dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
+            case "carre" -> new Carre(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
 
             default -> throw new IllegalArgumentException("Type inconnu !");
         };

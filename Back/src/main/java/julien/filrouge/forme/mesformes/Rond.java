@@ -1,12 +1,17 @@
 package julien.filrouge.forme.mesformes;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Rond extends Shape {
 
     private double radius;
 
-    public Rond(Long id, String color, double x, double y, double radius) {
+    public Rond() {}
 
-        super(id, color, x, y);
+    public Rond(String color, double x, double y, double radius) {
+
+        super(color, x, y);
         this.radius = radius;
 
     }

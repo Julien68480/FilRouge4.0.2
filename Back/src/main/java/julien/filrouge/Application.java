@@ -14,7 +14,7 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
-        Story story = new Story(1L,"TITRE", "description", EASY, "image");
+        Story story = new Story("TITRE", "description", EASY, "image");
         Chapter chapter1 = new Chapter("chapitre1", "NouveauTexte", 1, story, "Fait ceci", "IMG");
         Chapter chapter2 = new Chapter("chapitre 2", "Nouveau texte", 2, story, "Fait cela", "IMG");
 
