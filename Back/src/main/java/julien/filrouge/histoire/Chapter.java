@@ -41,11 +41,6 @@ public class  Chapter {
 
         story.addChapter(this);
 
-
-        shapes.add(new Rectangle("Red", 10, 20, 30, 20));
-        shapes.add(new Rond("Blue", 10, 20, 30));
-        shapes.add(new Triangle("Green", 10, 20, 30));
-        shapes.add(new Carre("Yellow", 10, 20, 30));
     }
 
     public String afficherPerimetreTotal() {
