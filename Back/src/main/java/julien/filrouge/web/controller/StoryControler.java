@@ -1,10 +1,7 @@
 package julien.filrouge.web.controller;
 
 import julien.filrouge.dto.ChapterDto;
-import julien.filrouge.dto.ShapeDto;
 import julien.filrouge.dto.StoryDto;
-import julien.filrouge.forme.mesformes.Shape;
-import julien.filrouge.histoire.Chapter;
 import julien.filrouge.histoire.Story;
 import julien.filrouge.web.StoryService;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class StoryControler {
@@ -25,21 +22,35 @@ public class StoryControler {
     }
 
     @GetMapping("/storys")
-    public List<StoryDto> listeStory(){ return storyService.findAll();}
+    public ResponseEntity<List<StoryDto>> listeStory(){
+        List<StoryDto> stories = storyService.findAll();
+
+        if (stories.isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList()); // créer une liste vide sans allocation mémoire
+        }
+
+        return ResponseEntity.ok(stories);
+    }
+
 
     @GetMapping("/storys/{id}")
-    public StoryDto afficherStory(@PathVariable Long id){
-        return storyService.findById(id);
+    public ResponseEntity<StoryDto> afficherStory(@PathVariable Long id){
+        StoryDto story = storyService.findById(id);
+
+        if (story == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(story);
     }
+
 
     @PostMapping("/storys")
     public ResponseEntity<Void> ajouterStory(@RequestBody StoryDto dto) {
 
         Story saved = storyService.save(dto);
 
-        if (Objects.isNull(saved)) {
-            return ResponseEntity.noContent().build(); // 204 si échec
-        }
+
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()       // part de la requete actuelle
@@ -54,15 +65,9 @@ public class StoryControler {
     public ResponseEntity<Void> modifierStory(@PathVariable Long id, @RequestBody StoryDto dto) {
         StoryDto existing = storyService.findById(id);
 
-        if (Objects.isNull(existing)) {
-            return ResponseEntity.notFound().build();
-        }
 
         Story updated = storyService.update(dto);
 
-        if (Objects.isNull(updated)) {
-            return ResponseEntity.noContent().build();
-        }
 
         return ResponseEntity.ok().build();
     }
@@ -71,9 +76,6 @@ public class StoryControler {
     public ResponseEntity<Void> supprimerStory(@PathVariable Long id) {
         StoryDto existing = storyService.findById(id);
 
-        if (Objects.isNull(existing)) {
-            return ResponseEntity.notFound().build();
-        }
 
         storyService.delete(id);
         return ResponseEntity.noContent().build();

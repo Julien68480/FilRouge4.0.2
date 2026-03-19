@@ -2,8 +2,11 @@ package julien.filrouge.web;
 
 import julien.filrouge.dto.ChapterDto;
 import julien.filrouge.dto.StoryDto;
+import julien.filrouge.histoire.ChapterRepository;
 import julien.filrouge.histoire.Story;
+import julien.filrouge.histoire.StoryRepository;
 import julien.filrouge.web.dao.ChapterDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import julien.filrouge.web.dao.StoryDao;
 
@@ -12,13 +15,12 @@ import java.util.List;
 @Service
 public class StoryService {
 
-    private final StoryDao storyDao;
-    private final ChapterDao chapterDao;
+    @Autowired
+    private StoryRepository storyRepository;
 
-    public StoryService(StoryDao storyDao, ChapterDao chapterDao) {
-        this.storyDao = storyDao;
-        this.chapterDao = chapterDao;
-    }
+    @Autowired
+    private ChapterRepository chapterRepository;
+
 
     /*List<StoryDto> result = new ArrayList<>();
         for (Story s : storyDao.findAll()) {
@@ -27,18 +29,28 @@ public class StoryService {
         return result;*/
 
     public List<StoryDto> findAll() {
-        return storyDao.findAll().stream()
-                .map(s -> new StoryDto(s.getId(), s.getTitre(), s.getDescription(), s.getDifficultyLevel(), s.getCoverImage()))
+        return storyRepository.findAll().stream()
+                .map(s -> new StoryDto(
+                        s.getId(),
+                        s.getTitre(),
+                        s.getDescription(),
+                        s.getDifficultyLevel(),
+                        s.getCoverImage()))
                 .toList();//crée une liste avec mes story
     }
 
 
     public StoryDto findById(Long id) {
-        Story s = storyDao.findById(id);
+        Story s = storyRepository.findById(id)
+                .orElse(null);
 
         if (s == null) return null;
 
-        return new StoryDto(s.getId(), s.getTitre(), s.getDescription(), s.getDifficultyLevel(), s.getCoverImage());
+        return new StoryDto(
+                s.getId(),
+                s.getTitre(), s.getDescription(),
+                s.getDifficultyLevel(),
+                s.getCoverImage());
     }
 
 
@@ -49,18 +61,30 @@ public class StoryService {
 
     public Story save(StoryDto dto) {
 
-        return storyDao.save(construireStory(dto));
+        return storyRepository.save(construireStory(dto));
 
     }
 
     public Story update(StoryDto dto) {
-        return storyDao.update(construireStory(dto));
+        Story story = storyRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Story non trouvée"));
+
+        story.setTitre(dto.getTitre());
+        story.setDescription(dto.getDescription());
+        story.setDifficultyLevel(dto.getDifficultyLevel());
+        story.setCoverImage(dto.getCoverImage());
+
+        return storyRepository.save(story);
     }
 
-    public void delete(Long id){ storyDao.delete(id);}
+    public void delete(Long id){
+
+        storyRepository.deleteById(id);
+
+    }
 
     public ChapterDto findFirstChapter(Long storyId) {
-        return chapterDao.findByStoryId(storyId)
+        return chapterRepository.findByStoryId(storyId)
                 .stream()
                 .filter(c -> c.getOrder() == 1)
                 .map(c -> new ChapterDto(
@@ -72,12 +96,13 @@ public class StoryService {
                         c.getImageModele(),
                         c.getShapes(),
                         storyId
-                ))                .findFirst()
+                ))
+                .findFirst()
                 .orElse(null);
     }
 
     public ChapterDto findNextChapter(Long storyId, int order) {
-        return chapterDao.findByStoryId(storyId)
+        return chapterRepository.findByStoryId(storyId)
                 .stream()
                 .filter(c -> c.getOrder() == order + 1)
                 .map(c -> new ChapterDto(

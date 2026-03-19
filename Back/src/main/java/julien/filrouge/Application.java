@@ -20,7 +20,10 @@ public class Application {
         return args -> {
             Faker f = new Faker();
 
-            //if (storyRepository.count() == 0) {
+            Story story2 = new Story(f.book().title(), f.movie().quote(), DifficultyLevel.EASY, "www.google.com");
+            System.out.println(story2.getTitre() + "  " +story2.getDescription());
+
+            if (storyRepository.count() == 0) {
 
                 Story story = new Story(
                         "Reach the Top",
@@ -56,9 +59,8 @@ public class Application {
                 // Sauvegarde finale
                 storyRepository.save(story);
 
-                Story story2 = new Story(f.book().title(), f.movie().quote(), DifficultyLevel.EASY, "www.google.com");
-                System.out.println(story2.getDescription());
-           // }
+
+            }
         };
     }
 }
