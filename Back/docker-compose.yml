@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   mysql:
     image: mysql:8.0
@@ -17,6 +19,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    networks:
+      - filrouge-network
 
   app:
     build: .
@@ -31,6 +35,12 @@ services:
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
     restart: unless-stopped
+    networks:
+      - filrouge-network
 
 volumes:
   db-data:
+
+networks:
+  filrouge-network:
+    driver: bridge
