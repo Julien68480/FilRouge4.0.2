@@ -8,8 +8,10 @@
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/forme/mesformes/Shape.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/forme/mesformes/Triangle.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/Chapter.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/ChapterRepository.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/DifficultyLevel.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/Story.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/StoryRepository.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/puzzle/Puzzle.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/ShapeService.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/StoryService.java
