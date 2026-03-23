@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.*;
+import julien.filrouge.histoire.Chapter;
 
 import java.util.List;
 

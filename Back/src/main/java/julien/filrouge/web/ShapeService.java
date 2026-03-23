@@ -2,7 +2,10 @@ package julien.filrouge.web;
 
 import julien.filrouge.dto.ShapeDto;
 import julien.filrouge.forme.mesformes.*;
+import julien.filrouge.histoire.Chapter;
+import julien.filrouge.histoire.ChapterRepository;
 import julien.filrouge.web.dao.ShapeDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,54 +14,42 @@ import java.util.List;
 @Service
 public class ShapeService {
 
-    private final ShapeDao shapeDao;
+    @Autowired
+    private ShapeRepository shapeRepository;
 
-    public ShapeService(ShapeDao shapeDao) {
-        this.shapeDao = shapeDao;
-    }
+    @Autowired
+    private ChapterRepository chapterRepository;
 
     private Shape construireShape(ShapeDto dto) {
-        return switch (dto.getType()){
-         //selon le type renvoyé on crée l'objet du bon type
-
+        return switch (dto.getType().toLowerCase()) {
             case "rectangle" -> new Rectangle(dto.getColor(), dto.getX(), dto.getY(), dto.getLength(), dto.getWidth());
-
-            case "rond" -> new Rond(dto.getColor(), dto.getX(), dto.getY(), dto.getRadius());
-
-            case "triangle" -> new Triangle(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
-
-            case "carre" -> new Carre(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
-
+            case "rond"      -> new Rond(dto.getColor(), dto.getX(), dto.getY(), dto.getRadius());
+            case "triangle"  -> new Triangle(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
+            case "carre"     -> new Carre(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
             default -> throw new IllegalArgumentException("Type inconnu !");
         };
-
     }
 
-    public Shape save(ShapeDto dto) {
-        //retourne un objet de type Shape on utilise la méthode
-        // save pour l'enregistrerc et elle reçoit ShapeDto
+    public Shape save(Long chapterId, ShapeDto dto) {
+        Chapter chapter = chapterRepository.findById(chapterId)
+                .orElseThrow(() -> new RuntimeException("Chapitre non trouvé"));
 
-        return shapeDao.save(construireShape(dto));
+        Shape shape = construireShape(dto);
+        shape.setChapter(chapter); // ← lien BDD
+        return shapeRepository.save(shape);
     }
 
-    public Shape update(ShapeDto dto) {
-
-        return shapeDao.update(construireShape(dto));
-
-    }
-
-    public void delete(Long id) {
-        shapeDao.delete(id);
-    }
-
-    public List<Shape> findAll() {
-        return shapeDao.findAll();
+    public List<Shape> findByChapterId(Long chapterId) {
+        return shapeRepository.findByChapterId(chapterId);
     }
 
     public Shape findById(Long id) {
-        return shapeDao.findById(id);
+        return shapeRepository.findById(id).orElse(null);
     }
 
-
+    public void delete(Long id) {
+        shapeRepository.deleteById(id);
+    }
 }
+
 

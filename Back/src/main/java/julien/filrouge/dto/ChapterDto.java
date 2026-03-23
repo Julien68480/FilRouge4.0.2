@@ -29,6 +29,7 @@ public class ChapterDto {
                     dto.setColor(s.getColor());
                     dto.setX(s.getX());
                     dto.setY(s.getY());
+                    dto.setType(s.getClass().getSimpleName());
                     return dto;
                 })
                 .toList();

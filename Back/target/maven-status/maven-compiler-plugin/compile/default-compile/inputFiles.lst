@@ -13,8 +13,10 @@
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/Story.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/histoire/StoryRepository.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/puzzle/Puzzle.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/ChapterService.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/ShapeService.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/StoryService.java
+/home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/controller/ChapterControler.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/controller/ShapeControler.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/controller/StoryControler.java
 /home/simon-julien/Documents/FIl rouge/Back/src/main/java/julien/filrouge/web/dao/ChapterDao.java

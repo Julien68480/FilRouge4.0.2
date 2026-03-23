@@ -32,7 +32,7 @@ public class ShapeControler {
         return shapeService.findById(id);
     }
 
-    @PostMapping("/shapes")
+    @PostMapping("/chapters/{chapterId}/shapes")
     public ResponseEntity<Void> ajouterShape(@RequestBody ShapeDto dto) {
 
         Shape saved = shapeService.save(dto);

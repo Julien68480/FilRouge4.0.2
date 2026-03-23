@@ -1,5 +1,6 @@
 julien/filrouge/web/dao/ChapterDao.class
 julien/filrouge/histoire/Story.class
+julien/filrouge/web/controller/ChapterControler.class
 julien/filrouge/histoire/Chapter.class
 julien/filrouge/web/StoryService.class
 julien/filrouge/puzzle/Puzzle.class
@@ -10,6 +11,7 @@ julien/filrouge/forme/mesformes/Carre.class
 julien/filrouge/dto/ShapeDto.class
 julien/filrouge/web/dao/StoryDao.class
 julien/filrouge/web/dao/ChapterDaoImpl.class
+julien/filrouge/web/ChapterService.class
 julien/filrouge/web/dao/ShapeDaolmpl.class
 julien/filrouge/web/controller/ShapeControler.class
 julien/filrouge/forme/mesformes/Triangle.class
