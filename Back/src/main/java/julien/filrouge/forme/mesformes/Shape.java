@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.*;
+import julien.filrouge.dto.ShapeDto;
 import julien.filrouge.histoire.Chapter;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public abstract class Shape {
     private String color;
     private double x;
     private double y;
+    @ManyToOne
+    @JoinColumn(name = "chapter_id")
+    private Chapter chapter;
 
 
     protected Shape(String color, double x, double y) {
@@ -23,6 +27,16 @@ public abstract class Shape {
         this.color = color;
         this.x = x;
         this.y = y;
+    }
+
+    public ShapeDto toDto() {
+        ShapeDto dto = new ShapeDto();
+        dto.setId(this.getId());
+        dto.setColor(this.getColor());
+        dto.setX(this.getX());
+        dto.setY(this.getY());
+        // ajoute tous tes champs...
+        return dto;
     }
 
     public Shape() {}
@@ -50,6 +64,14 @@ public abstract class Shape {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Chapter getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(Chapter chapter) {
+        this.chapter = chapter;
     }
 
     public void setX(double x) {

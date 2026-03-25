@@ -17,15 +17,15 @@ public class StoryDaolmpl implements StoryDao {
 
     static {
 
-        Story s1 = new Story("Mon histoire", "Ma première histoire", DifficultyLevel.EASY, "image première histoire");
-        s1.addChapter(new Chapter("Mon premier chapitre", "Il était une fois...", 1, s1, "Première instruction", "premier modèle"));
-        s1.addChapter(new Chapter("Mon deuxième chapitre", "La suite de l'aventure...", 2, s1, "Deuxième instruction", "deuxième modèle"));
+        Story s1 = new Story("Mon histoire", "Ma première histoire", DifficultyLevel.EASY);
+        s1.addChapter(new Chapter("Mon premier chapitre", "Il était une fois...", 1, s1, "Première instruction"));
+        s1.addChapter(new Chapter("Mon deuxième chapitre", "La suite de l'aventure...", 2, s1, "Deuxième instruction"));
         storys.add(s1);
 
-        Story s2 = new Story("La grande aventure", "Une épopée fantastique", DifficultyLevel.HARD, "image grande aventure");
-        s2.addChapter(new Chapter("Le départ", "Le héros quitte son village...", 1, s2, "Instruction départ", "modèle départ"));
-        s2.addChapter(new Chapter("L'épreuve", "Une terrible épreuve se présente...", 2, s2, "Instruction épreuve", "modèle épreuve"));
-        s2.addChapter(new Chapter("Le retour", "Victorieux, le héros rentre chez lui...", 3, s2, "Instruction retour", "modèle retour"));
+        Story s2 = new Story("La grande aventure", "Une épopée fantastique", DifficultyLevel.HARD);
+        s2.addChapter(new Chapter("Le départ", "Le héros quitte son village...", 1, s2, "Instruction départ"));
+        s2.addChapter(new Chapter("L'épreuve", "Une terrible épreuve se présente...", 2, s2, "Instruction épreuve"));
+        s2.addChapter(new Chapter("Le retour", "Victorieux, le héros rentre chez lui...", 3, s2, "Instruction retour"));
         storys.add(s2);
 
     }

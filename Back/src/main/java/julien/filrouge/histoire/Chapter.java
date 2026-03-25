@@ -23,21 +23,20 @@ public class  Chapter {
     @JoinColumn(name = "story_id")
     private Story story;
     private String instruction;
-    private String imageModele;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "chapter_id")
     private List<Shape> shapes = new ArrayList<>();
 
     public Chapter() {}
 
-    public Chapter(String titre, String texteNarratif, int order, Story story, String instruction, String imageModele) {
+    public Chapter(String titre, String texteNarratif, int order, Story story, String instruction) {
 
         this.titre = titre;
         this.texteNarratif = texteNarratif;
         this.order = order;
         this.story = story;
         this.instruction = instruction;
-        this.imageModele = imageModele;
 
         story.addChapter(this);
 
@@ -73,20 +72,12 @@ public class  Chapter {
         return instruction;
     }
 
-    public String getImageModele() {
-        return imageModele;
-    }
-
     public List<Shape> getShapes() {
         return shapes;
     }
 
     public void setInstruction(String instruction) {
         this.instruction = instruction;
-    }
-
-    public void setImageModele(String imageModele) {
-        this.imageModele = imageModele;
     }
 
     public void setShapes(List<Shape> shapes) {

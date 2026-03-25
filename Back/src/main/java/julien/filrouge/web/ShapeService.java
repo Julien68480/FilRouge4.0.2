@@ -4,7 +4,8 @@ import julien.filrouge.dto.ShapeDto;
 import julien.filrouge.forme.mesformes.*;
 import julien.filrouge.histoire.Chapter;
 import julien.filrouge.histoire.ChapterRepository;
-import julien.filrouge.web.dao.ShapeDao;
+import julien.filrouge.forme.mesformes.ShapeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ShapeService {
             case "rond"      -> new Rond(dto.getColor(), dto.getX(), dto.getY(), dto.getRadius());
             case "triangle"  -> new Triangle(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
             case "carre"     -> new Carre(dto.getColor(), dto.getX(), dto.getY(), dto.getSide());
-            default -> throw new IllegalArgumentException("Type inconnu !");
+            default -> throw new IllegalArgumentException("Type inconnu : " + dto.getType());
         };
     }
 
@@ -35,7 +36,7 @@ public class ShapeService {
                 .orElseThrow(() -> new RuntimeException("Chapitre non trouvé"));
 
         Shape shape = construireShape(dto);
-        shape.setChapter(chapter); // ← lien BDD
+        shape.setChapter(chapter);
         return shapeRepository.save(shape);
     }
 
@@ -51,5 +52,6 @@ public class ShapeService {
         shapeRepository.deleteById(id);
     }
 }
+
 
 

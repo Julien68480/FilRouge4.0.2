@@ -6,5 +6,5 @@ import java.util.List;
 
 @Repository
 public interface ShapeRepository extends JpaRepository<Shape, Long> {
-    List<Shape> findByChapterId(Long chapterId); // ← pour récupérer shapes d'un chapitre
+    List<Shape> findByChapterId(Long chapterId);
 }

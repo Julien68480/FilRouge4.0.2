@@ -1,14 +1,12 @@
 package julien.filrouge.web;
 
-import julien.filrouge.dto.ChapterDto;
 import julien.filrouge.dto.StoryDto;
 import julien.filrouge.histoire.ChapterRepository;
 import julien.filrouge.histoire.Story;
 import julien.filrouge.histoire.StoryRepository;
-import julien.filrouge.web.dao.ChapterDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import julien.filrouge.web.dao.StoryDao;
+
 
 import java.util.List;
 
@@ -34,8 +32,7 @@ public class StoryService {
                         s.getId(),
                         s.getTitre(),
                         s.getDescription(),
-                        s.getDifficultyLevel(),
-                        s.getCoverImage()))
+                        s.getDifficultyLevel()))
                 .toList();//crée une liste avec mes story
     }
 
@@ -49,14 +46,13 @@ public class StoryService {
         return new StoryDto(
                 s.getId(),
                 s.getTitre(), s.getDescription(),
-                s.getDifficultyLevel(),
-                s.getCoverImage());
+                s.getDifficultyLevel());
     }
 
 
     private Story construireStory(StoryDto dto){
 
-        return new Story(dto.getTitre(), dto.getDescription(), dto.getDifficultyLevel(), dto.getCoverImage());
+        return new Story(dto.getTitre(), dto.getDescription(), dto.getDifficultyLevel());
     }
 
     public Story save(StoryDto dto) {
@@ -65,56 +61,24 @@ public class StoryService {
 
     }
 
-    public Story update(StoryDto dto) {
+    public StoryDto update(StoryDto dto) {  // Signature OK
         Story story = storyRepository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException("Story non trouvée"));
 
         story.setTitre(dto.getTitre());
         story.setDescription(dto.getDescription());
         story.setDifficultyLevel(dto.getDifficultyLevel());
-        story.setCoverImage(dto.getCoverImage());
 
-        return storyRepository.save(story);
+        Story saved = storyRepository.save(story);
+
+        // ✅ CORRIGÉ : new StoryDto(4 paramètres)
+        return new StoryDto(saved.getId(), saved.getTitre(),
+                saved.getDescription(), saved.getDifficultyLevel());
     }
+
 
     public void delete(Long id){
-
         storyRepository.deleteById(id);
-
     }
 
-    public ChapterDto findFirstChapter(Long storyId) {
-        return chapterRepository.findByStoryId(storyId)
-                .stream()
-                .filter(c -> c.getOrder() == 1)
-                .map(c -> new ChapterDto(
-                        c.getId(),
-                        c.getTitre(),
-                        c.getTexteNarratif(),
-                        c.getOrder(),
-                        c.getInstruction(),
-                        c.getImageModele(),
-                        c.getShapes(),
-                        storyId
-                ))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public ChapterDto findNextChapter(Long storyId, int order) {
-        return chapterRepository.findByStoryId(storyId)
-                .stream()
-                .filter(c -> c.getOrder() == order + 1)
-                .map(c -> new ChapterDto(
-                        c.getId(),
-                        c.getTitre(),
-                        c.getTexteNarratif(),
-                        c.getOrder(),
-                        c.getInstruction(),
-                        c.getImageModele(),
-                        c.getShapes(),
-                        storyId
-                ))                .findFirst()
-                .orElse(null);
-    }
 }

@@ -19,13 +19,11 @@ public class ChapterControler {
         this.chapterService = chapterService;
     }
 
-    // GET /storys/1/chapters
     @GetMapping("/storys/{storyId}/chapters")
     public ResponseEntity<List<ChapterDto>> listerChapitres(@PathVariable Long storyId) {
         return ResponseEntity.ok(chapterService.findByStoryId(storyId));
     }
 
-    // POST /storys/1/chapters
     @PostMapping("/storys/{storyId}/chapters")
     public ResponseEntity<Void> ajouterChapitre(@PathVariable Long storyId,
                                                 @RequestBody ChapterDto dto) {
@@ -39,4 +37,38 @@ public class ChapterControler {
 
         return ResponseEntity.created(uri).build(); // 201 ✅
     }
+
+    @GetMapping("/storys/{storyId}/chapters/first")
+    public ChapterDto getFirstChapter(@PathVariable Long storyId) {
+        return chapterService.findFirstChapter(storyId);
+    }
+
+    @GetMapping("/storys/{storyId}/chapters/next")
+    public ChapterDto getNextChapter(@PathVariable Long storyId, @RequestParam int order) {
+        return chapterService.findNextChapter(storyId, order);
+    }
+
+    @GetMapping("/storys/{storyId}/chapters/{id}")
+    public ResponseEntity<ChapterDto> afficherChapitre(@PathVariable Long storyId,
+                                                       @PathVariable Long id) {
+        ChapterDto chapter = chapterService.findById(id);
+        if (chapter == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(chapter);
+    }
+
+    @PutMapping("/storys/{storyId}/chapters/{id}")
+    public ResponseEntity<Void> modifierChapitre(@PathVariable Long storyId,
+                                                 @PathVariable Long id,
+                                                 @RequestBody ChapterDto dto) {
+        chapterService.update(id, dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/storys/{storyId}/chapters/{id}")
+    public ResponseEntity<Void> supprimerChapitre(@PathVariable Long storyId,
+                                                  @PathVariable Long id) {
+        chapterService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

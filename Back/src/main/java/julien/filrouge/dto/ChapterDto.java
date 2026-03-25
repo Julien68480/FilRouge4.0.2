@@ -11,17 +11,15 @@ public class ChapterDto {
     private String textNarratif;
     private int order;
     private String instructions;
-    private String imageModele;
     private List<ShapeDto> shapes;
     private Long storyID;
 
-    public ChapterDto(Long id, String titre, String textNarratif, int order, String instructions, String imageModele, List<Shape> shapes, Long storyID) {
+    public ChapterDto(Long id, String titre, String textNarratif, int order, String instructions, List<ShapeDto> shapes, Long storyID) {
         this.id = id;
         this.titre = titre;
         this.textNarratif = textNarratif;
         this.order = order;
         this.instructions = instructions;
-        this.imageModele = imageModele;
         this.shapes = shapes.stream()
                 .map(s -> {
                     ShapeDto dto = new ShapeDto();
@@ -62,10 +60,6 @@ public class ChapterDto {
         return instructions;
     }
 
-    public String getImageModele() {
-        return imageModele;
-    }
-
     public List<ShapeDto> getShapes() {
         return shapes;
     }
@@ -92,10 +86,6 @@ public class ChapterDto {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
-    }
-
-    public void setImageModele(String imageModele) {
-        this.imageModele = imageModele;
     }
 
     public void setShapes(List<ShapeDto> shapes) {

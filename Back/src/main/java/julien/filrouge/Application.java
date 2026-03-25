@@ -18,24 +18,17 @@ public class Application {
     @Bean
     CommandLineRunner initData(StoryRepository storyRepository) {
         return args -> {
-            Faker f = new Faker();
-
-            Story story2 = new Story(f.book().title(), f.movie().quote(), DifficultyLevel.EASY, "www.google.com");
-            System.out.println(story2.getTitre() + "  " +story2.getDescription());
-
             if (storyRepository.count() == 0) {
 
-                Story story = new Story(
+                Story story1 = new Story(
                         "Reach the Top",
                         "Une histoire de formes geometriques",
-                        DifficultyLevel.EASY,
-                        "cover.png"
+                        DifficultyLevel.EASY
                 );
-                storyRepository.save(story); // sauvegarde la story pour pouvoir "avoir id de story" avant la création de chapitre
+                storyRepository.save(story1);
 
                 Chapter chapter1 = new Chapter(
-                        "Chapitre 1", "Texte du chapitre 1",
-                        1, story, "Instruction 1", "image1.jpg"
+                        "Chapitre 1", "Texte du chapitre 1", 1, story1, "Instruction 1"
                 );
                 chapter1.getShapes().add(new Rectangle("Red", 10, 20, 30, 20));
                 chapter1.getShapes().add(new Rond("Blue", 10, 20, 30));
@@ -43,8 +36,7 @@ public class Application {
                 chapter1.getShapes().add(new Carre("Yellow", 10, 20, 30));
 
                 Chapter chapter2 = new Chapter(
-                        "Chapitre 2", "Texte du chapitre 2",
-                        2, story, "Instruction 2", "image2.jpg"
+                        "Chapitre 2", "Texte du chapitre 2", 2, story1, "Instruction 2"
                 );
                 chapter2.getShapes().add(new Rectangle("Purple", 5, 5, 15, 10));
                 chapter2.getShapes().add(new Rond("Orange", 5, 5, 20));
@@ -52,15 +44,39 @@ public class Application {
                 chapter2.getShapes().add(new Carre("Black", 5, 5, 12));
 
                 Chapter chapter3 = new Chapter(
-                        "Chapitre 3", "Texte du chapitre 3",
-                        3, story, "Instruction 3", "image3.jpg"
+                        "Chapitre 3", "Texte du chapitre 3", 3, story1, "Instruction 3"
                 );
 
-                // Sauvegarde finale
-                storyRepository.save(story);
+                story1.addChapter(chapter1);
+                story1.addChapter(chapter2);
+                story1.addChapter(chapter3);
+                storyRepository.save(story1);
 
+                Story story2 = new Story(
+                        "Le Dragon des Ombres",
+                        "Une quête épique dans les montagnes sombres",
+                        DifficultyLevel.HARD
+                );
 
+                Chapter chapter4 = new Chapter(
+                        "Chapitre 1 - L'Appel", "Vous entendez un cri dans la nuit...",
+                        1, story2, "Cliquez sur le dragon"
+                );
+                chapter4.getShapes().add(new Rond("Red", 50, 50, 40));
+                chapter4.getShapes().add(new Triangle("Black", 100, 100, 60));
+
+                Chapter chapter5 = new Chapter(
+                        "Chapitre 2 - La Montagne", "La brume est épaisse...",
+                        2, story2, "Trouvez le chemin"
+                );
+                chapter5.getShapes().add(new Carre("Gray", 200, 150, 80));
+                chapter5.getShapes().add(new Rectangle("Brown", 250, 200, 100, 50));
+
+                story2.addChapter(chapter4);
+                story2.addChapter(chapter5);
+                storyRepository.save(story2);
             }
         };
     }
 }
+

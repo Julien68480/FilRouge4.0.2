@@ -11,14 +11,18 @@ public class StoryDto {
     private String titre;
     private String description;
     private DifficultyLevel difficultyLevel;
-    private String coverImage;
 
-    public StoryDto(Long id, String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
+    public StoryDto(Long id, String titre, String description, DifficultyLevel difficultyLevel) {
         this.id = id;
         this.titre = titre;
         this.description = description;
         this.difficultyLevel = difficultyLevel;
-        this.coverImage = coverImage;
+    }
+
+    public StoryDto(String titre, String description, DifficultyLevel difficultyLevel) {
+        this.titre = titre;
+        this.description = description;
+        this.difficultyLevel = difficultyLevel;
     }
 
     public StoryDto() {};
@@ -39,11 +43,6 @@ public class StoryDto {
         return difficultyLevel;
     }
 
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-
 
     public void setId(Long id) {
         this.id = id;
@@ -60,10 +59,5 @@ public class StoryDto {
     public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
     }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
-
 
 }

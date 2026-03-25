@@ -15,18 +15,16 @@ public class Story {
     private String titre;
     private String description;
     private DifficultyLevel difficultyLevel;
-    private String coverImage;
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters = new ArrayList<>();
 
     public Story() {}
 
-    public Story(String titre, String description, DifficultyLevel difficultyLevel, String coverImage) {
+    public Story(String titre, String description, DifficultyLevel difficultyLevel) {
 
         this.titre = titre;
         this.description = description;
         this.difficultyLevel = difficultyLevel;
-        this.coverImage = coverImage;
 
     }
 
@@ -55,10 +53,6 @@ public class Story {
         this.difficultyLevel = difficultyLevel;
     }
 
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
-
     public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }
@@ -77,10 +71,6 @@ public class Story {
 
     public DifficultyLevel getDifficultyLevel() {
         return difficultyLevel;
-    }
-
-    public String getCoverImage() {
-        return coverImage;
     }
 
     public List<Chapter> getChapters() {
