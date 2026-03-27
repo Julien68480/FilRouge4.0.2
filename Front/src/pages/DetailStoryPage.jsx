@@ -3,8 +3,10 @@ import { useStoryDetail } from "../hooks/useStoryDetail";
 import { useState, useEffect, useCallback } from "react";
 import { storyService } from "../services/storyService";
 import { chapterService } from "../services/chapterService";
+import { useLocation } from "react-router-dom";
 
 export default function DetailStoryPage() {
+  const location = useLocation();
   const { storyId } = useParams();
   const { story, chapters, loading, error, refetch } = useStoryDetail(storyId);
   const [editingStory, setEditingStory] = useState(false);
@@ -31,6 +33,18 @@ export default function DetailStoryPage() {
       });
     }
   }, [story]);
+
+  useEffect(() => {
+    if (location.state?.updatedChapter) {
+      setChapters(prev =>
+        prev.map(ch =>
+          ch.id === location.state.updatedChapter.id
+            ? location.state.updatedChapter
+            : ch
+        )
+      );
+    }
+  }, [location.state]);
 
   const showSuccess = useCallback((message) => {
     setSuccessMessage(message);
@@ -262,7 +276,6 @@ export default function DetailStoryPage() {
             ))}
           </div>
         </div>
-        <Outlet />
       </div>
 
       {/* POPUP AJOUTER CHAPITRE */}
@@ -347,6 +360,7 @@ export default function DetailStoryPage() {
           </div>
         </div>
       )}
+      <Outlet />
     </>
   );
 }

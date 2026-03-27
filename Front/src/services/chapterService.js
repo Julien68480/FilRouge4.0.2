@@ -1,12 +1,18 @@
-import { api } from './api';
+import { api } from "./api";
 
 export const chapterService = {
-  // Version axios (préférée si api.js existe)
-  getChaptersByStory: (storyId) => api.get(`/storys/${storyId}/chapters`),
-  createChapter: (storyId, chapterData) => api.post(`/storys/${storyId}/chapters`, chapterData),
-  
-  // Backend findById(id) et update(id)
-  getChapter: (chapterId) => api.get(`/chapters/${chapterId}`),
-  updateChapter: (chapterId, chapterData) => api.put(`/chapters/${chapterId}`, chapterData),
-  deleteChapter: (chapterId) => api.delete(`/chapters/${chapterId}`)
+
+  getChaptersByStory: (storyId) => api.get(`/stories/${storyId}/chapters`),
+
+  createChapter: (storyId, chapterData) =>
+    api.post(`/stories/${storyId}/chapters`, chapterData),
+
+  getChapter: (storyId, chapterId) =>
+    api.get(`/stories/${storyId}/chapters/${chapterId}`),
+
+  updateChapter: (storyId, chapterId, chapterData) =>
+    api.put(`/stories/${storyId}/chapters/${chapterId}`, chapterData),
+
+  deleteChapter: (storyId, chapterId) =>
+    api.delete(`/stories/${storyId}/chapters/${chapterId}`),
 };

@@ -1,34 +1,47 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { chapterService } from '../services/chapterService';
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { chapterService } from "../services/chapterService";
 
 export default function EditChapterPage() {
-  const { chapterId } = useParams();
+  const { storyId, chapterId } = useParams();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ titre: '', textNarratif: '', instructions: '' });
+  const [form, setForm] = useState({
+    titre: "",
+    textNarratif: "",
+    instructions: "",
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    chapterService.getChapter(chapterId).then(chapter => {
-      setForm(chapter);
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false);
-      navigate(-1);
-    });
-  }, [chapterId]);
+    console.log("storyId:", storyId);
+    console.log("chapterId:", chapterId);
+
+    if (!storyId || !chapterId) return;
+
+    chapterService
+      .getChapter(storyId, chapterId)
+      .then((res) => {
+        setForm(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        navigate(-1);
+      });
+  }, [storyId, chapterId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await chapterService.updateChapter(chapterId, form);
-      navigate(-1);
+      await chapterService.updateChapter(storyId, chapterId, form);
+      navigate(-1, { state: { updatedChapter: form } });
     } catch (error) {
       console.error(error);
     }
   };
 
-  if (loading) return <div className="p-8 text-center">Chargement chapitre...</div>;
+  if (loading)
+    return <div className="p-8 text-center">Chargement chapitre...</div>;
 
   return (
     <div className="p-8 bg-white rounded-2xl shadow-xl max-w-2xl mx-auto">
@@ -36,21 +49,21 @@ export default function EditChapterPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           value={form.titre}
-          onChange={e => setForm({...form, titre: e.target.value})}
+          onChange={(e) => setForm({ ...form, titre: e.target.value })}
           className="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500"
           placeholder="Titre du chapitre"
           required
         />
         <textarea
           value={form.textNarratif}
-          onChange={e => setForm({...form, textNarratif: e.target.value})}
+          onChange={(e) => setForm({ ...form, textNarratif: e.target.value })}
           className="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 h-32"
           placeholder="Texte narratif"
           required
         />
         <textarea
-          value={form.instructions || ''}
-          onChange={e => setForm({...form, instructions: e.target.value})}
+          value={form.instructions || ""}
+          onChange={(e) => setForm({ ...form, instructions: e.target.value })}
           className="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 h-24"
           placeholder="Instructions (optionnel)"
         />

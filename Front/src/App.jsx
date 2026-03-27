@@ -13,9 +13,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/stories" element={<StoryManagerPage />} />
-          <Route path="/stories/:storyId" element={<DetailStoryPage />}>
-            <Route path="chapters/:chapterId/edit" element={<EditChapterPage />}/>
-          </Route>
+          <Route path="/stories/:storyId" element={<DetailStoryPage />} />
+          <Route
+            path="/stories/:storyId/chapters/:chapterId/edit"
+            element={<EditChapterPage />}
+          />
         </Routes>
       </div>
     </Router>
