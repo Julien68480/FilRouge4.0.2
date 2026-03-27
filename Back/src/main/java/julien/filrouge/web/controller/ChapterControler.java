@@ -19,12 +19,13 @@ public class ChapterControler {
         this.chapterService = chapterService;
     }
 
-    @GetMapping("/storys/{storyId}/chapters")
+    @GetMapping("/stories/{storyId}/chapters")
     public ResponseEntity<List<ChapterDto>> listerChapitres(@PathVariable Long storyId) {
         return ResponseEntity.ok(chapterService.findByStoryId(storyId));
     }
 
-    @PostMapping("/storys/{storyId}/chapters")
+
+    @PostMapping("/stories/{storyId}/chapters")
     public ResponseEntity<Void> ajouterChapitre(@PathVariable Long storyId,
                                                 @RequestBody ChapterDto dto) {
         Chapter saved = chapterService.save(storyId, dto);
@@ -38,17 +39,17 @@ public class ChapterControler {
         return ResponseEntity.created(uri).build(); // 201 ✅
     }
 
-    @GetMapping("/storys/{storyId}/chapters/first")
+    @GetMapping("/stories/{storyId}/chapters/first")
     public ChapterDto getFirstChapter(@PathVariable Long storyId) {
         return chapterService.findFirstChapter(storyId);
     }
 
-    @GetMapping("/storys/{storyId}/chapters/next")
+    @GetMapping("/stories/{storyId}/chapters/next")
     public ChapterDto getNextChapter(@PathVariable Long storyId, @RequestParam int order) {
         return chapterService.findNextChapter(storyId, order);
     }
 
-    @GetMapping("/storys/{storyId}/chapters/{id}")
+    @GetMapping("/stories/{storyId}/chapters/{id}")
     public ResponseEntity<ChapterDto> afficherChapitre(@PathVariable Long storyId,
                                                        @PathVariable Long id) {
         ChapterDto chapter = chapterService.findById(id);
@@ -56,7 +57,7 @@ public class ChapterControler {
         return ResponseEntity.ok(chapter);
     }
 
-    @PutMapping("/storys/{storyId}/chapters/{id}")
+    @PutMapping("/stories/{storyId}/chapters/{id}")
     public ResponseEntity<Void> modifierChapitre(@PathVariable Long storyId,
                                                  @PathVariable Long id,
                                                  @RequestBody ChapterDto dto) {
@@ -64,7 +65,7 @@ public class ChapterControler {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/storys/{storyId}/chapters/{id}")
+    @DeleteMapping("/stories/{storyId}/chapters/{id}")
     public ResponseEntity<Void> supprimerChapitre(@PathVariable Long storyId,
                                                   @PathVariable Long id) {
         chapterService.delete(id);

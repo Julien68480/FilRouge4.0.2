@@ -21,7 +21,7 @@ public class StoryControler {
         this.storyService = storyService;
     }
 
-    @GetMapping("/storys")
+    @GetMapping("/stories")
     public ResponseEntity<List<StoryDto>> listeStory(){
         List<StoryDto> stories = storyService.findAll();
 
@@ -33,7 +33,7 @@ public class StoryControler {
     }
 
 
-    @GetMapping("/storys/{id}")
+    @GetMapping("/stories/{id}")
     public ResponseEntity<StoryDto> afficherStory(@PathVariable Long id){
         StoryDto story = storyService.findById(id);
 
@@ -45,7 +45,7 @@ public class StoryControler {
     }
 
 
-    @PostMapping("/storys")
+    @PostMapping("/stories")
     public ResponseEntity<Void> ajouterStory(@RequestBody StoryDto dto) {
 
         Story saved = storyService.save(dto);
@@ -61,7 +61,7 @@ public class StoryControler {
         return ResponseEntity.created(uri).build(); // on retourne la réponse (le lien de l'objet) dans le cas de la création d'un objet 201
     }
 
-    @PutMapping("/storys/{id}")
+    @PutMapping("/stories/{id}")
     public ResponseEntity<Void> modifierStory(@PathVariable Long id, @RequestBody StoryDto dto) {
         dto.setId(id);
         StoryDto existing = storyService.findById(id);
@@ -73,7 +73,7 @@ public class StoryControler {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/storys/{id}")
+    @DeleteMapping("/stories/{id}")
     public ResponseEntity<Void> supprimerStory(@PathVariable Long id) {
         StoryDto existing = storyService.findById(id);
 
