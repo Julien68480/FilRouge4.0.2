@@ -41,8 +41,8 @@ export default function StoryManagerPage() {
         setMessage("Histoire créée ! ✅");
       }
       setFormData({ titre: "", description: "", difficultyLevel: "EASY" });
-      fetchStories(); // Refresh
-      setTimeout(() => setMessage(""), 3000); // Disparaît après 3s
+      fetchStories();
+      setTimeout(() => setMessage(""), 3000);
     } catch (error) {
       setMessage("Erreur serveur 😢");
       console.error(error);

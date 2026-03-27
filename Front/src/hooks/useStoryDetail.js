@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { storyService } from '../services/storyService';
-import { chaptersService } from '../services/chaptersService';
+import { chapterService } from '../services/chapterService';
 
 export function useStoryDetail(storyId) {
   const [story, setStory] = useState(null);
@@ -8,14 +8,12 @@ export function useStoryDetail(storyId) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 🆕 FONCTION REFETCH (pour recharger les données)
   const refetch = useCallback(async () => {
     try {
       setLoading(true);
-      // Recharger histoire ET chapitres
       const [storyRes, chaptersRes] = await Promise.all([
         storyService.getById(storyId),
-        chaptersService.getChaptersByStory(storyId)
+        chapterService.getChaptersByStory(storyId)
       ]);
       
       setStory(storyRes.data);
@@ -29,7 +27,6 @@ export function useStoryDetail(storyId) {
     }
   }, [storyId]);
 
-  // useEffect initial (inchangé)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,7 +34,7 @@ export function useStoryDetail(storyId) {
         const storyRes = await storyService.getById(storyId);
         setStory(storyRes.data);
         
-        const chaptersRes = await chaptersService.getChaptersByStory(storyId);
+        const chaptersRes = await chapterService.getChaptersByStory(storyId);
         setChapters(chaptersRes.data || []);
         setError(null);
       } catch (err) {
@@ -55,6 +52,6 @@ export function useStoryDetail(storyId) {
     chapters, 
     loading, 
     error, 
-    refetch  // ← Ajouté !
+    refetch  
   };
 }

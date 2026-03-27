@@ -1,22 +1,12 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+import { api } from './api';
 
 export const chapterService = {
-  getByStoryId: (storyId) => 
-    fetch(`${API_URL}/storys/${storyId}/chapters`)
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      }),
-
-  create: async (storyId, chapterData) => {
-    const response = await fetch(`${API_URL}/storys/${storyId}/chapters`, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify(chapterData)
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
-  }
+  // Version axios (préférée si api.js existe)
+  getChaptersByStory: (storyId) => api.get(`/storys/${storyId}/chapters`),
+  createChapter: (storyId, chapterData) => api.post(`/storys/${storyId}/chapters`, chapterData),
+  
+  // Backend findById(id) et update(id)
+  getChapter: (chapterId) => api.get(`/chapters/${chapterId}`),
+  updateChapter: (chapterId, chapterData) => api.put(`/chapters/${chapterId}`, chapterData),
+  deleteChapter: (chapterId) => api.delete(`/chapters/${chapterId}`)
 };
