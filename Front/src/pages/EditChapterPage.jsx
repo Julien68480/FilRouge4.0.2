@@ -1,8 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { chapterService } from "../services/chapterService";
+import { shapesService } from "../services/shapesService";
+import { Stage, Layer, Rect, Circle, RegularPolygon } from "react-konva";
+import ShapePalette from "../components/canvas/ShapePalette";
 
 export default function EditChapterPage() {
+  const [canvasShapes, setCanvasShapes] = useState([]);
   const { storyId, chapterId } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -10,7 +14,16 @@ export default function EditChapterPage() {
     textNarratif: "",
     instructions: "",
   });
+  const [shapes, setShapes] = useState([]);
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (chapterId) {
+      shapesService
+        .getShapesByChapter(chapterId)
+        .then((res) => setShapes(res.data))
+        .catch((err) => console.error(err));
+    }
+  }, [chapterId]);
 
   useEffect(() => {
     console.log("storyId:", storyId);
@@ -30,6 +43,73 @@ export default function EditChapterPage() {
       });
   }, [storyId, chapterId]);
 
+  const SHAPE_COLORS = {
+    rectangle: "#60a5fa",
+    carre: "#34d399",
+    rond: "#f87171",
+    triangle: "#fbbf24",
+  };
+
+  const addShapeToCanvas = (type) => {
+    const newShape = {
+      id: `local-${Date.now()}`,
+      type,
+      x: 50,
+      y: 50,
+      color: SHAPE_COLORS[type],
+      width: 100,
+      length: 60,
+      radius: 40,
+      side: 80,
+    };
+    setCanvasShapes((prev) => [...prev, newShape]);
+  };
+
+  const renderShape = (shape) => {
+    const commonProps = {
+      x: shape.x,
+      y: shape.y,
+      fill: shape.color,
+    };
+
+    switch (shape.type) {
+      case "rectangle":
+        return (
+          <Rect
+            key={shape.id}
+            {...commonProps}
+            width={shape.width}
+            height={shape.length}
+          />
+        );
+
+      case "carre":
+        return (
+          <Rect
+            key={shape.id}
+            {...commonProps}
+            width={shape.side}
+            height={shape.side}
+          />
+        );
+
+      case "rond":
+        return <Circle key={shape.id} {...commonProps} radius={shape.radius} />;
+
+      case "triangle":
+        return (
+          <RegularPolygon
+            key={shape.id}
+            {...commonProps}
+            sides={3}
+            radius={shape.side}
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,7 +124,7 @@ export default function EditChapterPage() {
     return <div className="p-8 text-center">Chargement chapitre...</div>;
 
   return (
-    <div className="p-8 bg-white rounded-2xl shadow-xl max-w-2xl mx-auto">
+    <div className="p-8 bg-white rounded-2xl shadow-xl max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">✏️ Modifier Chapitre</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -65,8 +145,17 @@ export default function EditChapterPage() {
           value={form.instructions || ""}
           onChange={(e) => setForm({ ...form, instructions: e.target.value })}
           className="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 h-24"
-          placeholder="Instructions (optionnel)"
+          placeholder="Instructions"
         />
+        <div className="border rounded-xl overflow-hidden">
+          <ShapePalette onAddShape={addShapeToCanvas} />
+          <Stage width={900} height={900} className="bg-white">
+            <Layer>
+              {shapes.map((shape) => renderShape(shape))}
+              {canvasShapes.map((shape) => renderShape(shape))}
+            </Layer>
+          </Stage>
+        </div>
         <div className="flex gap-3 pt-4">
           <button
             type="button"

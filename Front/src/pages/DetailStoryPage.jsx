@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { storyService } from "../services/storyService";
 import { chapterService } from "../services/chapterService";
 import { useLocation } from "react-router-dom";
+import { Stage, Layer } from "react-konva";
 
 export default function DetailStoryPage() {
   const location = useLocation();
@@ -36,12 +37,12 @@ export default function DetailStoryPage() {
 
   useEffect(() => {
     if (location.state?.updatedChapter) {
-      setChapters(prev =>
-        prev.map(ch =>
+      setChapters((prev) =>
+        prev.map((ch) =>
           ch.id === location.state.updatedChapter.id
             ? location.state.updatedChapter
-            : ch
-        )
+            : ch,
+        ),
       );
     }
   }, [location.state]);
@@ -87,32 +88,23 @@ export default function DetailStoryPage() {
     const chapterData = { ...chapterForm, order: chapters.length + 1 };
     console.log("📤 ENVOI API", chapterData);
 
-    // UI OPTIMISTE (instantané)
-    const optimisticChapter = { ...chapterData, id: Date.now() }; // Temp ID
+    const optimisticChapter = { ...chapterData, id: Date.now() };
     const newChapters = [...chapters, optimisticChapter];
-    
-    // Mise à jour locale temporaire
-    // Note: Si useStoryDetail gère déjà les chapters, vous devrez adapter cette logique
 
-    // BDD (fire & forget)
     chapterService
       .createChapter(storyId, chapterData)
       .then((result) => {
-        // Remplace temp par vrai ID + refetch complet
         handleSuccessRefetch("Chapitre ajouté !");
       })
       .catch((error) => {
-        // Rollback optimiste seulement si vous gérez chapters localement
         console.error("❌ Sync KO", error);
         showSuccess("❌ Erreur création chapitre");
       });
 
-    // Reset UI
     setChapterForm({ titre: "", textNarratif: "", instructions: "" });
     setAddingChapter(false);
   };
 
-  // 🛡️ CONDITIONS DE CHARGEMENT
   if (loading)
     return (
       <div className="container mx-auto py-12 text-center">
@@ -132,14 +124,12 @@ export default function DetailStoryPage() {
   return (
     <>
       <div className="container mx-auto px-4 py-12">
-        {/* MESSAGE SUCCÈS */}
         {showSuccessMessage && (
           <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-xl shadow-2xl animate-pulse font-semibold border-2 border-green-400">
             ✓ {successMessage}
           </div>
         )}
 
-        {/* INFO HISTOIRE + ÉDITION */}
         <div className="mb-12">
           {editingStory ? (
             <div className="bg-white p-8 rounded-2xl shadow-xl">
@@ -210,8 +200,11 @@ export default function DetailStoryPage() {
                       : "bg-green-100 text-green-800"
                 }`}
               >
-                {story.difficultyLevel === "HARD" ? "Difficile" : 
-                 story.difficultyLevel === "MEDIUM" ? "Moyen" : "Facile"}
+                {story.difficultyLevel === "HARD"
+                  ? "Difficile"
+                  : story.difficultyLevel === "MEDIUM"
+                    ? "Moyen"
+                    : "Facile"}
               </div>
               <p className="text-xl text-gray-600 mt-4">{story.description}</p>
               <button
@@ -224,7 +217,6 @@ export default function DetailStoryPage() {
           )}
         </div>
 
-        {/* LISTE CHAPITRES */}
         <div className="bg-white p-8 rounded-2xl shadow-xl">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold">
@@ -278,7 +270,6 @@ export default function DetailStoryPage() {
         </div>
       </div>
 
-      {/* POPUP AJOUTER CHAPITRE */}
       {addingChapter && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
