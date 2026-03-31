@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.Entity;
+import julien.filrouge.dto.ShapeDto;
 
 @Entity
 public class Rectangle extends Shape {
@@ -46,6 +47,13 @@ public class Rectangle extends Shape {
 
         return 2 * ( length + width );
 
+    }
+    @Override
+    public ShapeDto toDto() {
+        ShapeDto dto = super.toDto();
+        dto.setLength(this.length);
+        dto.setWidth(this.width);
+        return dto;
     }
 }
 

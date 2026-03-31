@@ -62,15 +62,16 @@ public class Application {
                         "Chapitre 1 - L'Appel", "Vous entendez un cri dans la nuit...",
                         1, story2, "Cliquez sur le dragon"
                 );
-                chapter4.getShapes().add(new Rond("Red", 50, 50, 40));
-                chapter4.getShapes().add(new Triangle("Black", 100, 100, 60));
+                chapter4.getShapes().add(new Rond("Red", 150, 150, 40));
+                chapter4.getShapes().add(new Triangle("Black", 500, 100, 60));
 
                 Chapter chapter5 = new Chapter(
                         "Chapitre 2 - La Montagne", "La brume est épaisse...",
                         2, story2, "Trouvez le chemin"
                 );
-                chapter5.getShapes().add(new Carre("Gray", 200, 150, 80));
+                chapter5.getShapes().add(new Carre("Gray", 300, 300, 80));
                 chapter5.getShapes().add(new Rectangle("Brown", 250, 200, 100, 50));
+                chapter5.getShapes().add(new Triangle("Red",300, 400, 500));
 
                 story2.addChapter(chapter4);
                 story2.addChapter(chapter5);

@@ -20,17 +20,7 @@ public class ChapterDto {
         this.textNarratif = textNarratif;
         this.order = order;
         this.instructions = instructions;
-        this.shapes = shapes.stream()
-                .map(s -> {
-                    ShapeDto dto = new ShapeDto();
-                    dto.setId(s.getId());
-                    dto.setColor(s.getColor());
-                    dto.setX(s.getX());
-                    dto.setY(s.getY());
-                    dto.setType(s.getClass().getSimpleName());
-                    return dto;
-                })
-                .toList();
+        this.shapes = shapes;
         this.storyID = storyID;
     }
 

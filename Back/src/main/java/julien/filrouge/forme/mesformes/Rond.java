@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.Entity;
+import julien.filrouge.dto.ShapeDto;
 
 @Entity
 public class Rond extends Shape {
@@ -38,6 +39,14 @@ public class Rond extends Shape {
         return 2 * Math.PI * radius;
 
     }
+    @Override
+    public ShapeDto toDto() {
+        ShapeDto dto = super.toDto();
+        dto.setRadius(this.radius);
+        return dto;
+    }
+
+
 
 
 }

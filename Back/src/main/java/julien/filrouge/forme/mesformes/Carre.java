@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.Entity;
+import julien.filrouge.dto.ShapeDto;
 
 @Entity
 public class Carre extends Shape {
@@ -30,6 +31,13 @@ public class Carre extends Shape {
         return side * side;
 
     }
+    @Override
+    public ShapeDto toDto() {
+        ShapeDto dto = super.toDto();
+        dto.setSide(this.side);
+        return dto;
+    }
+
 
     @Override
     public double calculPerimetre() {

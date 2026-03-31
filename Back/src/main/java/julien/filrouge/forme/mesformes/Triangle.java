@@ -1,6 +1,7 @@
 package julien.filrouge.forme.mesformes;
 
 import jakarta.persistence.Entity;
+import julien.filrouge.dto.ShapeDto;
 
 @Entity
 public class Triangle extends Shape {
@@ -38,5 +39,12 @@ public class Triangle extends Shape {
         return side * 3;
 
     }
+    @Override
+    public ShapeDto toDto() {
+        ShapeDto dto = super.toDto();
+        dto.setSide(this.side);
+        return dto;
+    }
+
 
 }
