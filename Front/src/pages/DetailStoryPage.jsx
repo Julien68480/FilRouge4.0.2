@@ -4,10 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 import { storyService } from "../services/storyService";
 import { chapterService } from "../services/chapterService";
 import { useLocation } from "react-router-dom";
-import { Stage, Layer } from "react-konva";
+import { useNavigate } from "react-router-dom";
 
 export default function DetailStoryPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { storyId } = useParams();
   const { story, chapters, loading, error, refetch } = useStoryDetail(storyId);
   const [editingStory, setEditingStory] = useState(false);
@@ -78,6 +79,19 @@ export default function DetailStoryPage() {
     } catch (error) {
       console.error("Erreur:", error);
       showSuccess("❌ Erreur modification histoire");
+    }
+  };
+
+  const handleDeleteStory = async () => {
+    if (!storyId) return;
+
+    if (window.confirm(`Supprimer l'histoire "${story.titre}" ?`)) {
+      try {
+        await storyService.delete(storyId);
+        navigate(-1);
+      } catch (error) {
+        console.error("Erreur suppression histoire", error);
+      }
     }
   };
 
@@ -215,6 +229,12 @@ export default function DetailStoryPage() {
               </button>
             </>
           )}
+          <button
+            onClick={handleDeleteStory}
+            className="mt-2 ml-3 bg-red-500 text-white px-8 py-3 rounded-xl hover:bg-red-600 font-semibold shadow-lg"
+          >
+            🗑️ Supprimer l’histoire
+          </button>
         </div>
 
         <div className="bg-white p-8 rounded-2xl shadow-xl">
