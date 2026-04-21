@@ -15,7 +15,7 @@ public class Story {
     private String titre;
     private String description;
     private DifficultyLevel difficultyLevel;
-    @OneToMany(mappedBy = "story", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chapter> chapters = new ArrayList<>();
 
     public Story() {}

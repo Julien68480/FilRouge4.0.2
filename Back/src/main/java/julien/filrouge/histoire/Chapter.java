@@ -24,8 +24,10 @@ public class  Chapter {
     private Story story;
     private String instruction;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
     @JoinColumn(name = "chapter_id")
+
     private List<Shape> shapes = new ArrayList<>();
 
     public Chapter() {}
