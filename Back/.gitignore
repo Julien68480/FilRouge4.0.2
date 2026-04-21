@@ -28,3 +28,12 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+*.iml
+.idea/
+
+.env
+deploy.env
+
+src/main/resources/application-local.properties

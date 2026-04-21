@@ -1,0 +1,56 @@
+package julien.filrouge.forme.mesformes;
+
+import jakarta.persistence.Entity;
+import julien.filrouge.dto.ShapeDto;
+
+@Entity
+public class Rond extends Shape {
+
+    private double radius;
+
+    public Rond() {}
+
+    public Rond(String color, double x, double y, double radius) {
+
+        super(color, x, y);
+        this.radius = radius;
+
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    @Override
+    public double calculAire() {
+
+        return Math.PI * Math.pow(radius, 2);
+
+    }
+
+    @Override
+    public double calculPerimetre()
+    {
+
+        return 2 * Math.PI * radius;
+
+    }
+    @Override
+    public ShapeDto toDto() {
+        ShapeDto dto = super.toDto();
+        dto.setRadius(this.radius);
+        return dto;
+    }
+
+
+
+
+}
+
+
+
+
