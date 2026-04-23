@@ -35,18 +35,24 @@ public class ChapterService {
         return chapterRepository.save(chapter);
     }
 
+    private ChapterDto toDto(Chapter c) {
+        return new ChapterDto(
+                c.getId(),
+                c.getTitre(),
+                c.getTexteNarratif(),
+                c.getOrder(),
+                c.getInstruction(),
+                c.getShapes().stream().map(Shape::toDto).toList(),
+                c.getStory().getId(),
+                c.afficherAireTotal(),
+                c.afficherPerimetreTotal()
+        );
+    }
+
     public List<ChapterDto> findByStoryId(Long storyId) {
         return chapterRepository.findByStoryId(storyId)
                 .stream()
-                .map(c -> new ChapterDto(
-                        c.getId(),
-                        c.getTitre(),
-                        c.getTexteNarratif(),
-                        c.getOrder(),
-                        c.getInstruction(),
-                        c.getShapes().stream().map(Shape::toDto).toList(),
-                        storyId
-                ))
+                .map(this::toDto)
                 .toList();
     }
 
@@ -54,12 +60,7 @@ public class ChapterService {
         return chapterRepository.findByStoryId(storyId)
                 .stream()
                 .filter(c -> c.getOrder() == 1)
-                .map(c -> new ChapterDto(
-                        c.getId(), c.getTitre(), c.getTexteNarratif(),
-                        c.getOrder(), c.getInstruction(),
-                        c.getShapes().stream().map(Shape::toDto).toList(),
-                        storyId
-                ))
+                .map(this::toDto)
                 .findFirst()
                 .orElse(null);
     }
@@ -68,28 +69,16 @@ public class ChapterService {
         return chapterRepository.findByStoryId(storyId)
                 .stream()
                 .filter(c -> c.getOrder() == order + 1)
-                .map(c -> new ChapterDto(
-                        c.getId(), c.getTitre(), c.getTexteNarratif(),
-                        c.getOrder(), c.getInstruction(),
-                        c.getShapes().stream().map(Shape::toDto).toList(),
-                        storyId
-                ))
+                .map(this::toDto)
                 .findFirst()
                 .orElse(null);
     }
 
     public ChapterDto findById(Long id) {
-        Chapter c = chapterRepository.findById(id)
-                .orElse(null);
+        Chapter c = chapterRepository.findById(id).orElse(null);
         if (c == null) return null;
 
-        Long storyId = c.getStory().getId();
-        return new ChapterDto(
-                c.getId(), c.getTitre(), c.getTexteNarratif(),
-                c.getOrder(), c.getInstruction(),
-                c.getShapes().stream().map(Shape::toDto).toList(),
-                storyId
-        );
+        return toDto(c);
     }
 
     public Chapter update(Long id, ChapterDto dto) {

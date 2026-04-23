@@ -13,8 +13,10 @@ public class ChapterDto {
     private String instructions;
     private List<ShapeDto> shapes;
     private Long storyID;
+    private double aireTotal;
+    private double perimetreTotal;
 
-    public ChapterDto(Long id, String titre, String textNarratif, int order, String instructions, List<ShapeDto> shapes, Long storyID) {
+    public ChapterDto(Long id, String titre, String textNarratif, int order, String instructions, List<ShapeDto> shapes, Long storyID,  double aireTotal, double perimetreTotal) {
         this.id = id;
         this.titre = titre;
         this.textNarratif = textNarratif;
@@ -22,9 +24,27 @@ public class ChapterDto {
         this.instructions = instructions;
         this.shapes = shapes;
         this.storyID = storyID;
+        this.aireTotal = aireTotal;
+        this.perimetreTotal = perimetreTotal;
     }
 
     public ChapterDto() {}
+
+    public void setAireTotal(double aireTotal) {
+        this.aireTotal = aireTotal;
+    }
+
+    public void setPerimetreTotal(double perimetreTotal) {
+        this.perimetreTotal = perimetreTotal;
+    }
+
+    public double getAireTotal() {
+        return aireTotal;
+    }
+
+    public double getPerimetreTotal() {
+        return perimetreTotal;
+    }
 
     public Long getStoryID() {
         return storyID;

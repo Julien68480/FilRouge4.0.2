@@ -126,7 +126,7 @@ class ChapterTest {
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction");
 
         // ACT
-        String resultat = chapter.afficherPerimetreTotal();
+        double resultat = chapter.afficherPerimetreTotal();
 
         // ASSERT
         assertEquals("Périmètre total : 498.4955592153876", resultat);
@@ -141,7 +141,7 @@ class ChapterTest {
         Chapter chapter = new Chapter("Mon Titre", "Texte narratif", 1, story, "Instruction");
 
         // ACT
-        String resultat = chapter.afficherAireTotal();
+        double resultat = chapter.afficherAireTotal();
 
         // ASSERT
         assertEquals("Aire totale : 4717.144819933811", resultat);

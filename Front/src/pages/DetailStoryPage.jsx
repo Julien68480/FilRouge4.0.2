@@ -274,16 +274,23 @@ export default function DetailStoryPage() {
                 <p className="text-gray-700 mb-3 leading-relaxed">
                   {chapter.textNarratif?.substring(0, 120)}...
                 </p>
-                {chapter.instructions && (
+                {chapter.instruction && (
                   <div className="bg-yellow-50 border-l-4 border-yellow-400 pl-4 py-3 mb-3">
                     <p className="text-sm font-medium text-yellow-900">
                       📋 Instructions :
                     </p>
                     <p className="text-sm text-yellow-800 mt-1">
-                      {chapter.instructions}
+                      {chapter.instruction}
                     </p>
                   </div>
                 )}
+
+                <p className="text-sm text-blue-800 mt-1">
+                  Aire totale : {(chapter.aireTotal ?? 0).toFixed(2)}
+                </p>
+                <p className="text-sm text-blue-800 mt-1">
+                  Périmètre total : {(chapter.perimetreTotal ?? 0).toFixed(2)}
+                </p>
               </div>
             ))}
           </div>

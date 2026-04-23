@@ -44,7 +44,7 @@ public class  Chapter {
 
     }
 
-    public String afficherPerimetreTotal() {
+    public double afficherPerimetreTotal() {
 
         double totalPerimetre = 0;
 
@@ -53,11 +53,11 @@ public class  Chapter {
             totalPerimetre += shape.calculPerimetre();
 
         }
-        return "Périmètre total : " + totalPerimetre;
+        return totalPerimetre;
 
     }
 
-    public String afficherAireTotal() {
+    public double afficherAireTotal() {
 
         double totalAire = 0;
 
@@ -66,7 +66,7 @@ public class  Chapter {
             totalAire += shape.calculAire();
 
         }
-        return "Aire totale : " + totalAire;
+        return totalAire;
 
     }
 
